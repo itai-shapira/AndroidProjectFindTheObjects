@@ -25,20 +25,11 @@
         android:text="By: Itai Zvi Shapira" />
 
     <Button
-        android:id="@+id/btLoginActivity"
+        android:id="@+id/btLoginFragment"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_gravity="center"
         android:text="Login 5s" />
 
-    <Button
-        android:id="@+id/btRegisterActivity"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:backgroundTint="#8D8D8D"
-        android:textColor="@color/black"
-        android:text="Register" />
 </LinearLayout>

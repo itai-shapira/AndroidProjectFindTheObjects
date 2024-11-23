@@ -1,6 +1,7 @@
 package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class IntroActivity extends AppCompatActivity {
-    Button btLoginActivity, btRegisterActivity;
+    Button btLoginFragment, btRegisterFragment;
     CountDownTimer cdt;
 
     @Override
@@ -17,10 +18,9 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        btLoginActivity = findViewById(R.id.btLoginActivity);
-        btRegisterActivity = findViewById(R.id.btRegisterActivity);
+        btLoginFragment = findViewById(R.id.btLoginFragment);
 
-        btLoginActivity.setOnClickListener(new View.OnClickListener() {
+        btLoginFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
@@ -28,18 +28,10 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
-        btRegisterActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IntroActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
         cdt = new CountDownTimer(8000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                btLoginActivity.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
+                btLoginFragment.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
             }
 
             @Override
