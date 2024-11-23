@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class RegisterActivity extends AppCompatActivity {
     Button btIntroActivity, btRegister, btLoginActivity;
-    EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etLastNameRegister, etPhoneRegister, etEmailRegister;
+    EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etLastNameRegister, etPhoneRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
         etPwdCheckRegister = findViewById(R.id.etPwdCheckRegister);
         etLastNameRegister = findViewById(R.id.etLastNameRegister);
         etPhoneRegister = findViewById(R.id.etPhoneRegister);
-        etEmailRegister = findViewById(R.id.etEmailRegister);
         btRegister = findViewById(R.id.btRegister);
         btLoginActivity = findViewById(R.id.btLoginActivity);
 
@@ -35,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setUserPwd(etPwdRegister.getText().toString());
                 user.setUserLastName(etLastNameRegister.getText().toString());
                 user.setUserPhone(etPhoneRegister.getText().toString());
-                user.setUserEmail(etEmailRegister.getText().toString());
             }
         });
 

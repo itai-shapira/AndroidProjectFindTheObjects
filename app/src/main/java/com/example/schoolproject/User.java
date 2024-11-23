@@ -8,7 +8,6 @@ public class User {
         this.userPwd = userPwd;
         this.userLastName = userLastName;
         this.userPhone = userPhone;
-        this.userEmail = userEmail;
     }
     public User(String userName, String userPwd) {
         this.userName = userName;
@@ -37,11 +36,5 @@ public class User {
     }
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
-    }
-    public String getUserEmail() {
-        return userEmail;
-    }
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
     }
 }

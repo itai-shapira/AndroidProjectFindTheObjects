@@ -81,17 +81,6 @@
         android:inputType="phone"
         android:textColorHint="#6E6E6E" />
 
-    <EditText
-        android:id="@+id/etEmailRegister"
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#6E6E6E" />
-
     <Button
         android:id="@+id/btRegister"
         android:layout_gravity="center"
