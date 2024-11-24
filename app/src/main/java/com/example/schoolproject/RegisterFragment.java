@@ -1,5 +1,6 @@
 package com.example.schoolproject;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -74,8 +75,10 @@ public class RegisterFragment extends Fragment {
         Button btRegister = view.findViewById(R.id.btRegister);
         Button btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
+        HelperDB helperDB = new HelperDB(getActivity());
 
         User user = new User("", "", "");
+
         btRegister.setOnClickListener(new View.OnClickListener() {
             // Registers user and adds their info to the database
             @Override
@@ -83,6 +86,15 @@ public class RegisterFragment extends Fragment {
                 user.setUserName(etUserNameRegister.getText().toString());
                 user.setUserPwd(etPwdRegister.getText().toString());
                 user.setUserPhone(etPhoneRegister.getText().toString());
+
+                ContentValues cv = new ContentValues();
+                cv.put(helperDB.USER_NAME,user.getUserName());
+                cv.put(helperDB.USER_PWD,user.getUserPwd());
+                cv.put(helperDB.USER_PHONE,user.getUserPhone());
+
+                SQLiteDatabase db = helperDB.getWritableDatabase();
+                db.insert(helperDB.USERS_TABLE, null, cv);
+                db.close();
             }
         });
 

@@ -1,6 +1,12 @@
 package com.example.schoolproject;
 
+import static com.example.schoolproject.HelperDB.USER_NAME;
+import static com.example.schoolproject.HelperDB.USER_PHONE;
+import static com.example.schoolproject.HelperDB.USER_PWD;
+
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +82,7 @@ public class LoginFragment extends Fragment {
         User user = new User("", "");
 
         btLogin.setOnClickListener(new View.OnClickListener() {
+            // Logs-in the user (NOT DONE YET)
             @Override
             public void onClick(View v) {
                 user.setUserName(etUserNameLogin.getText().toString());
@@ -102,5 +111,32 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    HelperDB helperDB = new HelperDB(getActivity());
+    SQLiteDatabase db;
+
+    // Reads and returns the data from the Users table
+    public ArrayList<User> getAllRecords() {
+        int index;
+        String name, pwd, phone;
+        db = helperDB.getReadableDatabase();
+        ArrayList<User> list = new ArrayList<>();
+
+        Cursor cursor = db.query(helperDB.USERS_TABLE, null, null, null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            index = cursor.getColumnIndex(USER_NAME);
+            name = cursor.getString(index);
+            index = cursor.getColumnIndex(USER_PWD);
+            pwd = cursor.getString(index);
+            index = cursor.getColumnIndex(USER_PHONE);
+            phone = cursor.getString(index);
+            User record = new User(name, pwd, phone);
+            list.add(record);
+        }
+
+        db.close();
+        return list;
     }
 }
