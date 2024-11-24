@@ -1,6 +1,7 @@
 package com.example.schoolproject;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -69,18 +70,18 @@ public class RegisterFragment extends Fragment {
         EditText etUserNameRegister = view.findViewById(R.id.etUserNameRegister);
         EditText etPwdRegister = view.findViewById(R.id.etPwdRegister);
         EditText etPwdCheckRegister = view.findViewById(R.id.etPwdCheckRegister);
-        EditText etLastNameRegister = view.findViewById(R.id.etLastNameRegister);
         EditText etPhoneRegister = view.findViewById(R.id.etPhoneRegister);
         Button btRegister = view.findViewById(R.id.btRegister);
         Button btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
-        User user = new User("", "", "", "", "");
+
+        User user = new User("", "", "");
         btRegister.setOnClickListener(new View.OnClickListener() {
+            // Registers user and adds their info to the database
             @Override
             public void onClick(View v) {
                 user.setUserName(etUserNameRegister.getText().toString());
                 user.setUserPwd(etPwdRegister.getText().toString());
-                user.setUserLastName(etLastNameRegister.getText().toString());
                 user.setUserPhone(etPhoneRegister.getText().toString());
             }
         });

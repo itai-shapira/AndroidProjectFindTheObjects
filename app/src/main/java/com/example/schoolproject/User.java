@@ -2,12 +2,11 @@ package com.example.schoolproject;
 
 // Handles Users
 public class User {
-    private String userName, userPwd, userLastName, userPhone, userEmail;
+    private String userName, userPwd, userLastName, userPhone;
 
-    public User(String userName, String userPwd, String userLastName, String userPhone, String userEmail) {
+    public User(String userName, String userPwd, String userPhone) {
         this.userName = userName;
         this.userPwd = userPwd;
-        this.userLastName = userLastName;
         this.userPhone = userPhone;
     }
     public User(String userName, String userPwd) {
@@ -25,12 +24,6 @@ public class User {
     }
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
-    }
-    public String getUserLastName() {
-        return userLastName;
-    }
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
     }
     public String getUserPhone() {
         return userPhone;

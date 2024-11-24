@@ -2,6 +2,7 @@ package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 public class LoginActivity extends AppCompatActivity {
@@ -10,6 +11,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        HelperDB helperDB = new HelperDB(this);
+        SQLiteDatabase db;
+        db = helperDB.getWritableDatabase();
         if (savedInstanceState == null) {
 
             getSupportFragmentManager().beginTransaction()
