@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="50dp"
-        android:text="Android Project" />
+        android:text="PassGame" />
 
     <TextView
         android:id="@+id/tvIntroSubTitle"
