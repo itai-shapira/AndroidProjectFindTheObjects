@@ -1,5 +1,6 @@
 package com.example.schoolproject;
 
+// Handles Users
 public class User {
     private String userName, userPwd, userLastName, userPhone, userEmail;
 
