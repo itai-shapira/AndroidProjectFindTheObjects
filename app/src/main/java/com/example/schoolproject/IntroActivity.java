@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class IntroActivity extends AppCompatActivity {
-    Button btLoginFragment, btRegisterFragment;
+    Button btLoginFragment;
     CountDownTimer cdt;
 
     @Override
@@ -21,6 +21,7 @@ public class IntroActivity extends AppCompatActivity {
         btLoginFragment = findViewById(R.id.btLoginFragment);
 
         btLoginFragment.setOnClickListener(new View.OnClickListener() {
+            // Navigates to the Login screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
@@ -29,11 +30,13 @@ public class IntroActivity extends AppCompatActivity {
         });
 
         cdt = new CountDownTimer(8000, 1000) {
+            // Changes the text on the Login button to match the time left
             @Override
             public void onTick(long millisUntilFinished) {
                 btLoginFragment.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
             }
 
+            // Navigates to the Login screen
             @Override
             public void onFinish() {
                 Intent intent = new Intent(IntroActivity.this, LoginActivity.class);

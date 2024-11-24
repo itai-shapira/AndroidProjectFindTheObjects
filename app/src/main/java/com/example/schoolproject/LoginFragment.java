@@ -72,6 +72,7 @@ public class LoginFragment extends Fragment {
         Button btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
 
         User user = new User("", "");
+
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +82,7 @@ public class LoginFragment extends Fragment {
         });
 
         btIntroActivity.setOnClickListener(new View.OnClickListener() {
+           // Navigates to the Intro screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), IntroActivity.class);
@@ -89,6 +91,7 @@ public class LoginFragment extends Fragment {
         });
 
         btRegisterFragment.setOnClickListener(new View.OnClickListener() {
+            // Navigates to the Register screen
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
