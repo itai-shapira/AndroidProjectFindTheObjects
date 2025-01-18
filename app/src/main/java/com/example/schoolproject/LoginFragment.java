@@ -87,6 +87,9 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 user.setUserName(etUserNameLogin.getText().toString());
                 user.setUserPwd(etPwdLogin.getText().toString());
+
+                Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
+                startActivity(intent);
             }
         });
 
