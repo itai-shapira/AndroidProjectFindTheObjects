@@ -29,19 +29,19 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
-        cdt = new CountDownTimer(8000, 1000) {
-            // Changes the text on the Login button to match the time left
-            @Override
-            public void onTick(long millisUntilFinished) {
-                btLoginFragment.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
-            }
-
-            // Navigates to the Login screen
-            @Override
-            public void onFinish() {
-                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        }.start();
+//        cdt = new CountDownTimer(8000, 1000) {
+//            // Changes the text on the Login button to match the time left
+//            @Override
+//            public void onTick(long millisUntilFinished) {
+//                btLoginFragment.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
+//            }
+//
+//            // Navigates to the Login screen
+//            @Override
+//            public void onFinish() {
+//                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        }.start();
     }
 }
