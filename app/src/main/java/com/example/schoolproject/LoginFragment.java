@@ -114,29 +114,4 @@ public class LoginFragment extends Fragment {
     }
 
     HelperDB helperDB = new HelperDB(getActivity());
-    SQLiteDatabase db;
-
-    // Reads and returns the data from the Users table
-    public ArrayList<User> getAllRecords() {
-        int index;
-        String name, pwd, phone;
-        db = helperDB.getReadableDatabase();
-        ArrayList<User> list = new ArrayList<>();
-
-        Cursor cursor = db.query(helperDB.USERS_TABLE, null, null, null, null, null, null);
-
-        while (cursor.moveToNext()) {
-            index = cursor.getColumnIndex(USER_NAME);
-            name = cursor.getString(index);
-            index = cursor.getColumnIndex(USER_PWD);
-            pwd = cursor.getString(index);
-            index = cursor.getColumnIndex(USER_PHONE);
-            phone = cursor.getString(index);
-            User record = new User(name, pwd, phone);
-            list.add(record);
-        }
-
-        db.close();
-        return list;
-    }
 }
