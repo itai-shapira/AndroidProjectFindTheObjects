@@ -3,15 +3,17 @@ package com.example.schoolproject;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.schoolproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
+public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
     private List<String> UserNameList;
     private List<Integer> Player1WinsList;
     private List<Integer> Player2WinsList;
@@ -37,9 +39,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     @Override
     public void onBindViewHolder(UsersViewHolder holder, int position) {
         String userName = UserNameList.get(position);
-        int player1Wins = Player1WinsList.get(position);
-        int player2Wins = Player2WinsList.get(position);
-        int draws = DrawsList.get(position);
+        String player1Wins = "" + Player1WinsList.get(position);
+        String player2Wins = "" + Player2WinsList.get(position);
+        String draws = "" + DrawsList.get(position);
 
         holder.userNameTextView.setText(userName);
         holder.player1WinsTextView.setText(player1Wins);
@@ -50,5 +52,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     @Override
     public int getItemCount() {
         return UserNameList.size();
+    }
+
+    public static class UsersViewHolder extends RecyclerView.ViewHolder {
+        TextView userNameTextView;
+        TextView player1WinsTextView;
+        TextView player2WinsTextView;
+        TextView drawsTextView;
+
+        public UsersViewHolder(View itemView) {
+            super(itemView);
+            userNameTextView = itemView.findViewById(R.id.tvUserName);
+            player1WinsTextView = itemView.findViewById(R.id.tvPlayer1Wins);
+            player2WinsTextView = itemView.findViewById(R.id.tvPlayer2Wins);
+            drawsTextView = itemView.findViewById(R.id.tvDraws);
+        }
     }
 }

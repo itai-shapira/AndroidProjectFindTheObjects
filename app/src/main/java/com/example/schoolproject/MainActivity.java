@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btUserDetails.setOnClickListener(new View.OnClickListener() {
+        btUsers.setOnClickListener(new View.OnClickListener() {
             // Navigates to the Users screen
             @Override
             public void onClick(View v) {
