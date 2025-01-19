@@ -18,6 +18,7 @@ import android.widget.ImageView;
 public class UserDetailsActivity extends AppCompatActivity {
 
     Button btCamera;
+    Button btMainActivity;
     ImageView ivPhoto;
     ActivityResultLauncher<Intent> arSmall;
 
@@ -37,6 +38,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         btCamera = findViewById(R.id.btCamera);
         ivPhoto = findViewById(R.id.ivPhoto);
+        btMainActivity = findViewById(R.id.btMainActivity);
 
         // Creating the ActivityResultLauncher
         arSmall = registerForActivityResult(
@@ -52,6 +54,13 @@ public class UserDetailsActivity extends AppCompatActivity {
                         ivPhoto.setImageBitmap(bitmap);
                         ivPhoto.setImageBitmap(result.getData().getParcelableExtra("data"));
                     } });
+        btMainActivity.setOnClickListener(new View.OnClickListener() {
+            // Navigates to the Main screen
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserDetailsActivity.this, MainActivity.class);
+                startActivity(intent);
+            }});
 
         btCamera.setOnClickListener(new View.OnClickListener() {
             // Takes a photo using the phone's camera

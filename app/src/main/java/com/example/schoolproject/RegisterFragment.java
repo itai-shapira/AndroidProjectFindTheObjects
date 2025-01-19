@@ -80,7 +80,7 @@ public class RegisterFragment extends Fragment {
         User user = new User("", "", "");
 
         btRegister.setOnClickListener(new View.OnClickListener() {
-            // Registers user and adds their info to the database
+            // Registers user, adds their info to the database and navigates to the Main screen
             @Override
             public void onClick(View v) {
                 user.setUserName(etUserNameRegister.getText().toString());
@@ -95,6 +95,9 @@ public class RegisterFragment extends Fragment {
                 SQLiteDatabase db = helperDB.getWritableDatabase();
                 db.insert(helperDB.USERS_TABLE, null, cv);
                 db.close();
+
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
 

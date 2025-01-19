@@ -7,8 +7,18 @@
     android:orientation="vertical"
     tools:context=".UsersActivity">
 
+    <Button
+        android:id="@+id/btMainActivity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="#8D8D8D"
+        android:textColor="@color/black"
+        android:text="Back" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -8,14 +8,27 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btUserDetails"
-        android:layout_width="match_parent"
+        android:id="@+id/btIntroActivity"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="#8D8D8D"
+        android:textColor="@color/black"
+        android:text="Log Out" />
+
+    <Button
+        android:id="@+id/btUserDetails"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:text="Details" />
 
     <Button
         android:id="@+id/btUsers"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
         android:text="User Stats" />
 </LinearLayout>
