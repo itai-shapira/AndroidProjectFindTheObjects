@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+// The main screen of the app
 public class MainActivity extends AppCompatActivity {
 
     Button btPhotoActivity, btUsers, btIntroActivity;
@@ -28,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         tvWelcome.setText("Welcome " + sharedPreferences.getString("username", "DefaultName"));
 
-
+        // Logs-out the user and navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {
-            // Logs out and navigates to the Intro screen
             @Override
             public void onClick(View v) {
                 editor.remove("username");
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // Navigates to the Photo screen when the button is pressed
         btPhotoActivity.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the User Details screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Navigates to the users screen when the button is pressed
         btUsers.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Users screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UsersActivity.class);

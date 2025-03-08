@@ -12,6 +12,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+// The screen where all the user's statistics can be viewed
 public class UsersActivity extends AppCompatActivity {
 
     Button btMainActivity;
@@ -27,8 +28,8 @@ public class UsersActivity extends AppCompatActivity {
 
         btMainActivity = findViewById(R.id.btMainActivity);
 
+        // Navigates to the Main screen when the button is pressed
         btMainActivity.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Main screen
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UsersActivity.this, MainActivity.class);
@@ -38,6 +39,7 @@ public class UsersActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    // creates the RecyclerView where all the user's stats are displayed
     private void initRecyclerView() {
         userNameList = new ArrayList<String>();
         userFoundObjectsList = new ArrayList<String>();

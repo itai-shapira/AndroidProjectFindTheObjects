@@ -10,12 +10,12 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 
+// The first screen that opens when you launch the app
 public class IntroActivity extends AppCompatActivity {
     Button btLoginFragment;
     SharedPreferences sharedPreferences;
     String currentUser;
     final String DEFAULT_NAME = "DefaultName";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,34 +26,20 @@ public class IntroActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         currentUser = sharedPreferences.getString("username", DEFAULT_NAME);
 
+        // Navigates to the Main screen if the previous user didn't log-out
         if (!currentUser.equals(DEFAULT_NAME)) {
             Intent intent = new Intent(IntroActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
 
+        // Navigates to the Login screen when the button is pressed
         btLoginFragment.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Login screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
-//        cdt = new CountDownTimer(8000, 1000) {
-//            // Changes the text on the Login button to match the time left
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                btLoginFragment.setText("Login " + (millisUntilFinished / 1000 + 1) + "s");
-//            }
-//
-//            // Navigates to the Login screen
-//            @Override
-//            public void onFinish() {
-//                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        }.start();
     }
 }

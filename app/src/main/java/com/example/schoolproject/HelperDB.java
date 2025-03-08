@@ -20,6 +20,7 @@ public class HelperDB extends SQLiteOpenHelper {
     public static final String USER_FOUND_OBJECTS = "UserFoundObjects";
     SQLiteDatabase db;
 
+    // Constructor
     public HelperDB(@Nullable Context context) {
         super(context, DB_FILE, null, 1);
     }
@@ -29,7 +30,6 @@ public class HelperDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(buildUserTable());
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -70,6 +70,7 @@ public class HelperDB extends SQLiteOpenHelper {
         db.close();
         return list;
     }
+    // Returns a User based on input username
     public User getRecord(String userName) {
         ArrayList<User> users = this.getAllRecords();
         for (User user : users) {
@@ -79,6 +80,7 @@ public class HelperDB extends SQLiteOpenHelper {
         return null;
     }
 
+    // Deletes a row from the database
     public void deleteUserByRow(long id) {
         db = this.getWritableDatabase();
         Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);

@@ -23,6 +23,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+// The screen where the user logs-in
 public class LoginFragment extends Fragment {
     Button btIntroActivity, btLogin, btRegisterFragment, btRecoverPasswordFragment;
     EditText etUserNameLogin, etPwdLogin;
@@ -57,8 +59,8 @@ public class LoginFragment extends Fragment {
 
         User user = new User("", "");
 
+        // Logs-in the user and navigates to the Login screen when the button is pressed
         btLogin.setOnClickListener(new View.OnClickListener() {
-            // Logs-in the user
             @Override
             public void onClick(View v) {
                 String userName = etUserNameLogin.getText().toString();
@@ -80,8 +82,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // Navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {
-           // Navigates to the Intro screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), IntroActivity.class);
@@ -89,8 +91,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // Navigates to the Register screen when the button is pressed
         btRegisterFragment.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Register screen
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -100,8 +102,8 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        // Navigates to the Recover Password screen when the button is pressed
         btRecoverPasswordFragment.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Register screen
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();

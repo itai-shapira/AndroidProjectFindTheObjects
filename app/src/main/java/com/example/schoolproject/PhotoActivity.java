@@ -65,7 +65,7 @@ public class PhotoActivity extends AppCompatActivity {
 
         tvFound.setText("Found: " + currentUser.getFoundObjectsString());
 
-        // Creating the ActivityResultLauncher
+        // Creating the ActivityResultLauncher (takes a photo, classifies it using ai, and updates the database according to the results)
         arLauncher = registerForActivityResult(
 
                 new ActivityResultContracts.StartActivityForResult(),
@@ -106,22 +106,24 @@ public class PhotoActivity extends AppCompatActivity {
 
                         tvFound.setText("Found: " + helperDB.getRecord(userName).getFoundObjectsString());
                     } });
+
+        // Navigates to the Main screen when the button is pressed
         btMainActivity.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Main screen
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
                 startActivity(intent);
             }});
 
+        // Takes a photo using the phone's camera
         btCamera.setOnClickListener(new View.OnClickListener() {
-            // Takes a photo using the phone's camera
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 arLauncher.launch(intent);
             }});
     }
+    // Classifies an image using the ai model
     private int classifyImage(Bitmap bitmap) {
         try {
             ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());
@@ -163,8 +165,7 @@ public class PhotoActivity extends AppCompatActivity {
             return max;
 
         } catch (IOException e) {
-            // TODO Handle the exception
+            return 0;
         }
-        return 0;
     }
 }

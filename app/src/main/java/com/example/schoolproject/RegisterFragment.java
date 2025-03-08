@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+// The screen whre the user regsters to the app
 public class RegisterFragment extends Fragment {
     Button btIntroActivity, btRegister, btLoginFragment;
     EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etPhoneRegister;
@@ -53,8 +54,8 @@ public class RegisterFragment extends Fragment {
 
         HelperDB helperDB = new HelperDB(getActivity());
 
+        // Registers user, adds their info to the database and navigates to the Main screen when the button is pressed
         btRegister.setOnClickListener(new View.OnClickListener() {
-            // Registers user, adds their info to the database and navigates to the Main screen
             @Override
             public void onClick(View v) {
                 String userName, userPwd, userPwdCheck, userPhone;
@@ -89,8 +90,8 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        // Navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Intro screen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), IntroActivity.class);
@@ -98,8 +99,8 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        // Navigates to the Login screen when the button is pressed
         btLoginFragment.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Login screen
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();

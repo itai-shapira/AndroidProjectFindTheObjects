@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// The screen where the user can recover their password in case they forgot it
 public class RecoverPasswordFragment extends Fragment {
     private static final int SEND_SMS = 0;
     Button btLoginFragment, btSendSMS;
@@ -48,8 +49,8 @@ public class RecoverPasswordFragment extends Fragment {
 
         HelperDB helperDB =  new HelperDB(getActivity());
 
+        // Navigates to the Login screen when the button is pressed
         btLoginFragment.setOnClickListener(new View.OnClickListener() {
-            // Navigates to the Login screen
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -59,8 +60,8 @@ public class RecoverPasswordFragment extends Fragment {
             }
         });
 
+        // Sends an SMS to the user containing their username and password the button is pressed
         btSendSMS.setOnClickListener(new View.OnClickListener() {
-            //
             @Override
             public void onClick(View v) {
                 String userName = etUserName.getText().toString();
@@ -91,6 +92,7 @@ public class RecoverPasswordFragment extends Fragment {
         }
     }
 
+    // Function to handle the results from checkPermission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {
