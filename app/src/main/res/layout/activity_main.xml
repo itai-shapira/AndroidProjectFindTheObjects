@@ -16,6 +16,16 @@
         android:textColor="@color/black"
         android:text="Log Out" />
 
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:text="Welcome" />
+
     <Button
         android:id="@+id/btUserDetails"
         android:layout_gravity="center"

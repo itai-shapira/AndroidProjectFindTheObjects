@@ -1,10 +1,13 @@
 package com.example.schoolproject;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.schoolproject.HelperDB.USER_NAME;
 import static com.example.schoolproject.HelperDB.USER_PHONE;
 import static com.example.schoolproject.HelperDB.USER_PWD;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -40,6 +43,10 @@ public class LoginFragment extends Fragment {
         Button btLogin = view.findViewById(R.id.btLogin);
         Button btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
 
+        Context context = getActivity();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         HelperDB helperDB = new HelperDB(getActivity());
 
         User user = new User("", "");
@@ -56,6 +63,9 @@ public class LoginFragment extends Fragment {
                 for (User u : users) {
                     if (user.getUserName().equals(u.getUserName())) {
                         if (user.getUserPwd().equals(u.getUserPwd())) {
+                            editor.putString("username", user.getUserName());
+                            editor.apply();
+
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                         }
