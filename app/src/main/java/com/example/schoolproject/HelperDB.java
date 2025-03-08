@@ -63,30 +63,11 @@ public class HelperDB extends SQLiteOpenHelper {
             phone = cursor.getString(index);
             index = cursor.getColumnIndex(USER_FOUND_OBJECTS);
             found_objects = cursor.getString(index);
-            User record = new User(name, pwd, phone, convertFoundObjects(found_objects));
+            User record = new User(name, pwd, phone, found_objects);
             list.add(record);
         }
 
         db.close();
         return list;
-    }
-
-    public static Boolean[] convertFoundObjects(String strFoundObjects) {
-        Boolean[] foundObjects = new Boolean[6];
-        for (int i = 0; i < strFoundObjects.length(); i++) {
-            if ((int)strFoundObjects.charAt(i) == 1)
-                foundObjects[i] = true;
-        }
-        return foundObjects;
-    }
-    public static String convertFoundObjects(Boolean[] foundObjects) {
-        String strFoundObjects = "";
-        for (boolean b : foundObjects) {
-            if (b)
-                strFoundObjects = strFoundObjects + 1;
-            else
-                strFoundObjects = strFoundObjects + 0;
-        }
-        return strFoundObjects;
     }
 }

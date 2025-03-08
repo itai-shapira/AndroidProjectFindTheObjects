@@ -2,10 +2,9 @@ package com.example.schoolproject;
 
 // Handles Users
 public class User {
-    private String userName, userPwd, userPhone;
-    private Boolean[] userFoundObjects;
+    private String userName, userPwd, userPhone, userFoundObjects;
 
-    public User(String userName, String userPwd, String userPhone, Boolean[] userFoundObjects) {
+    public User(String userName, String userPwd, String userPhone, String userFoundObjects) {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
@@ -15,6 +14,7 @@ public class User {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
+        userFoundObjects = "000000";
     }
     public User(String userName, String userPwd) {
         this.userName = userName;
@@ -38,10 +38,28 @@ public class User {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
-    public Boolean[] getUserFoundObjects() {
+    public String getUserFoundObjects() {
         return userFoundObjects;
     }
-    public void setUserFoundObjects(Boolean[] userFoundObjects) {
+    public void setUserFoundObjects(String userFoundObjects) {
         this.userFoundObjects = userFoundObjects;
     }
+    public Boolean[] getFoundObjectsArray() {
+        Boolean[] foundObjects_arr = new Boolean[6];
+        for (int i = 0; i < userFoundObjects.length(); i++) {
+            if ((int)userFoundObjects.charAt(i) == 1)
+                foundObjects_arr[i] = true;
+        }
+        return foundObjects_arr;
+    }
+//    public void setFoundObjects(Boolean[] foundObjects_arr) {
+//        String strFoundObjects = "";
+//        for (boolean b : foundObjects_arr) {
+//            if (b)
+//                strFoundObjects = strFoundObjects + 1;
+//            else
+//                strFoundObjects = strFoundObjects + 0;
+//        }
+//        userFoundObjects = strFoundObjects;
+//    }
 }
