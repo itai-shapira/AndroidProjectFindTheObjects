@@ -49,7 +49,6 @@ public class HelperDB extends SQLiteOpenHelper {
         SQLiteDatabase db;
         int index;
         String name, pwd, phone, found_objects;
-        Boolean[6]
         db = this.getReadableDatabase();
         ArrayList<User> list = new ArrayList<>();
 
