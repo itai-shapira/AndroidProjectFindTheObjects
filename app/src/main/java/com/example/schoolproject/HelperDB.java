@@ -70,4 +70,12 @@ public class HelperDB extends SQLiteOpenHelper {
         db.close();
         return list;
     }
+    public User getRecord(String userName) {
+        ArrayList<User> users = this.getAllRecords();
+        for (User user : users) {
+            if (user.getUserName().equals(userName))
+                return user;
+        }
+        return null;
+    }
 }

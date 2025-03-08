@@ -23,6 +23,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 public class LoginFragment extends Fragment {
+    Button btRecoverPasswordFragment;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -42,6 +43,7 @@ public class LoginFragment extends Fragment {
         EditText etPwdLogin = view.findViewById(R.id.etPwdLogin);
         Button btLogin = view.findViewById(R.id.btLogin);
         Button btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
+        btRecoverPasswordFragment = view.findViewById(R.id.btRecoverPasswordFragment);
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
@@ -89,6 +91,17 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, new RegisterFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        btRecoverPasswordFragment.setOnClickListener(new View.OnClickListener() {
+            // Navigates to the Register screen
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new RecoverPasswordFragment());
                 transaction.addToBackStack(null);
                 transaction.commit();
             }

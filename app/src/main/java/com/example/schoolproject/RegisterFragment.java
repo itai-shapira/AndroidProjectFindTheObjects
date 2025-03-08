@@ -14,51 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class RegisterFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    Button btIntroActivity, btRegister, btLoginFragment;
+    EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etPhoneRegister;
     public RegisterFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RegisterFragment newInstance(String param1, String param2) {
-        RegisterFragment fragment = new RegisterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -67,13 +32,13 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
-        Button btIntroActivity = view.findViewById(R.id.btIntroActivity);
-        EditText etUserNameRegister = view.findViewById(R.id.etUserNameRegister);
-        EditText etPwdRegister = view.findViewById(R.id.etPwdRegister);
-        EditText etPwdCheckRegister = view.findViewById(R.id.etPwdCheckRegister);
-        EditText etPhoneRegister = view.findViewById(R.id.etPhoneRegister);
-        Button btRegister = view.findViewById(R.id.btRegister);
-        Button btLoginFragment = view.findViewById(R.id.btLoginFragment);
+        btIntroActivity = view.findViewById(R.id.btIntroActivity);
+        etUserNameRegister = view.findViewById(R.id.etUserNameRegister);
+        etPwdRegister = view.findViewById(R.id.etPwdRegister);
+        etPwdCheckRegister = view.findViewById(R.id.etPwdCheckRegister);
+        etPhoneRegister = view.findViewById(R.id.etPhoneRegister);
+        btRegister = view.findViewById(R.id.btRegister);
+        btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
         HelperDB helperDB = new HelperDB(getActivity());
 
@@ -91,7 +56,7 @@ public class RegisterFragment extends Fragment {
                 cv.put(helperDB.USER_NAME,user.getUserName());
                 cv.put(helperDB.USER_PWD,user.getUserPwd());
                 cv.put(helperDB.USER_PHONE,user.getUserPhone());
-                cv.put(helperDB.USER_FOUND_OBJECTS,"000000");
+                cv.put(helperDB.USER_FOUND_OBJECTS,user.getUserFoundObjects());
 
                 SQLiteDatabase db = helperDB.getWritableDatabase();
                 db.insert(helperDB.USERS_TABLE, null, cv);
