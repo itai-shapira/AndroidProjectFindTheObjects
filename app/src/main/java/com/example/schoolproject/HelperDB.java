@@ -1,7 +1,5 @@
 package com.example.schoolproject;
 
-import static android.app.DownloadManager.COLUMN_ID;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -83,7 +81,8 @@ public class HelperDB extends SQLiteOpenHelper {
 
     public void deleteUserByRow(long id) {
         db = this.getWritableDatabase();
-        db.delete(USERS_TABLE, COLUMN_ID + "=" + id, null);
+        Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);
+        db.delete(USERS_TABLE, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
         db.close();// close the database
     }
 }

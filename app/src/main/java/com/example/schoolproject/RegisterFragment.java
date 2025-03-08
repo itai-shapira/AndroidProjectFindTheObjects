@@ -1,7 +1,11 @@
 package com.example.schoolproject;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -43,6 +47,10 @@ public class RegisterFragment extends Fragment {
         tvError = view.findViewById(R.id.tvError);
         btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
+        Context context = getActivity();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         HelperDB helperDB = new HelperDB(getActivity());
 
         btRegister.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +76,9 @@ public class RegisterFragment extends Fragment {
                         SQLiteDatabase db = helperDB.getWritableDatabase();
                         db.insert(helperDB.USERS_TABLE, null, cv);
                         db.close();
+
+                        editor.putString("username", userName);
+                        editor.apply();
 
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);

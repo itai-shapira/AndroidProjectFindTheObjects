@@ -55,8 +55,9 @@ public class User {
     public String getFoundObjectsString() {
         int alreadyFound = 0;
         for (int i = 0; i < userFoundObjects.length(); i++) {
-            if ((int)userFoundObjects.charAt(i) == 1)
+            if (userFoundObjects.charAt(i) == '1') {
                 alreadyFound++;
+            }
         }
         return "" + alreadyFound + "/" + userFoundObjects.length();
     }

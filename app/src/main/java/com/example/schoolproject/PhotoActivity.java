@@ -7,8 +7,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -77,7 +79,32 @@ public class PhotoActivity extends AppCompatActivity {
                         ivPhoto.setImageBitmap(bitmap);
                         // ivPhoto.setImageBitmap(result.getData().getParcelableExtra("data"));
                         bitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_SIZE, IMAGE_SIZE, false);
-                        classifyImage(bitmap);
+                        int max = classifyImage(bitmap);
+
+                        String userName = currentUser.getUserName();
+                        String userFoundObjects = currentUser.getUserFoundObjects();
+                        String newUserFoundObjects = "";
+
+                        for (int i = 0; i < userFoundObjects.length(); i++) {
+                            if (i == max)
+                                newUserFoundObjects += "1";
+                            else
+                                newUserFoundObjects += "0";
+                        }
+
+                        helperDB.deleteUserByRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1);
+
+                        ContentValues cv = new ContentValues();
+                        cv.put(helperDB.USER_NAME, currentUser.getUserName());
+                        cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
+                        cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
+                        cv.put(helperDB.USER_FOUND_OBJECTS, newUserFoundObjects);
+
+                        SQLiteDatabase db = helperDB.getWritableDatabase();
+                        db.insert(helperDB.USERS_TABLE, null, cv);
+                        db.close(); // closes the Database
+
+                        tvFound.setText("Found: " + helperDB.getRecord(userName).getFoundObjectsString());
                     } });
         btMainActivity.setOnClickListener(new View.OnClickListener() {
             // Navigates to the Main screen
@@ -95,7 +122,7 @@ public class PhotoActivity extends AppCompatActivity {
                 arLauncher.launch(intent);
             }});
     }
-    private void classifyImage(Bitmap bitmap) {
+    private int classifyImage(Bitmap bitmap) {
         try {
             ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());
 
@@ -131,13 +158,13 @@ public class PhotoActivity extends AppCompatActivity {
             String[] classes = {"Umbrella", "Plastic Bottle", "Calculator", "Glasses", "Pencil", "Notebook"};
             tvResult.setText(classes[max]);
             tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
-
-
             // Releases model resources if no longer used.
             model.close();
+            return max;
 
         } catch (IOException e) {
             // TODO Handle the exception
         }
+        return 0;
     }
 }
