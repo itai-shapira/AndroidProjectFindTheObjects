@@ -27,7 +27,7 @@
         android:text="Welcome" />
 
     <Button
-        android:id="@+id/btUserDetails"
+        android:id="@+id/btPhotoActivity"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

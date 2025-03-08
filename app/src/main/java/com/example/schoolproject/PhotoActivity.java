@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,20 +26,18 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class UserDetailsActivity extends AppCompatActivity {
+public class PhotoActivity extends AppCompatActivity {
 
-    Button btCamera;
-    Button btMainActivity;
+    Button btCamera, btMainActivity;
     ImageView ivPhoto;
-    TextView tvResult;
-    TextView tvConfidence;
+    TextView tvResult, tvConfidence, tvFound;
     ActivityResultLauncher<Intent> arLauncher;
     final int IMAGE_SIZE = 224;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_details);
+        setContentView(R.layout.activity_photo);
         ActivityCompat.requestPermissions(this,
 
                 new String[]{android.Manifest.permission.CAMERA,
@@ -54,6 +53,15 @@ public class UserDetailsActivity extends AppCompatActivity {
         btMainActivity = findViewById(R.id.btMainActivity);
         tvResult = findViewById(R.id.tvResult);
         tvConfidence = findViewById(R.id.tvConfidence);
+        tvFound = findViewById(R.id.tvFound);
+
+        HelperDB helperDB = new HelperDB(PhotoActivity.this);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
+
+        tvFound.setText("Found: " + currentUser.getFoundObjectsString());
 
         // Creating the ActivityResultLauncher
         arLauncher = registerForActivityResult(
@@ -75,7 +83,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             // Navigates to the Main screen
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserDetailsActivity.this, MainActivity.class);
+                Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
                 startActivity(intent);
             }});
 

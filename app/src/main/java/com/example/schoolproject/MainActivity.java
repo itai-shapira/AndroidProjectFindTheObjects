@@ -1,10 +1,7 @@
 package com.example.schoolproject;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,25 +11,21 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btUserDetails;
-    Button btUsers;
-    Button btIntroActivity;
+    Button btPhotoActivity, btUsers, btIntroActivity;
     TextView tvWelcome;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btUserDetails = findViewById(R.id.btUserDetails);
+        btPhotoActivity = findViewById(R.id.btPhotoActivity);
         btUsers = findViewById(R.id.btUsers);
         btIntroActivity = findViewById(R.id.btIntroActivity);
         tvWelcome = findViewById(R.id.tvWelcome);
 
-        sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         tvWelcome.setText("Welcome " + sharedPreferences.getString("username", "DefaultName"));
 
 
@@ -47,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btUserDetails.setOnClickListener(new View.OnClickListener() {
+        btPhotoActivity.setOnClickListener(new View.OnClickListener() {
             // Navigates to the User Details screen
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UserDetailsActivity.class);
+                Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
                 startActivity(intent);
             }
         });

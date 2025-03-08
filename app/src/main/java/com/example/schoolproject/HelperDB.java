@@ -1,5 +1,7 @@
 package com.example.schoolproject;
 
+import static android.app.DownloadManager.COLUMN_ID;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +20,7 @@ public class HelperDB extends SQLiteOpenHelper {
     public static final String USER_PWD = "UserPassword";
     public static final String USER_PHONE = "UserPhone";
     public static final String USER_FOUND_OBJECTS = "UserFoundObjects";
+    SQLiteDatabase db;
 
     public HelperDB(@Nullable Context context) {
         super(context, DB_FILE, null, 1);
@@ -46,7 +49,6 @@ public class HelperDB extends SQLiteOpenHelper {
 
     // Reads and returns the data from the Users table
     public ArrayList<User> getAllRecords() {
-        SQLiteDatabase db;
         int index;
         String name, pwd, phone, found_objects;
         db = this.getReadableDatabase();
@@ -77,5 +79,11 @@ public class HelperDB extends SQLiteOpenHelper {
                 return user;
         }
         return null;
+    }
+
+    public void deleteUserByRow(long id) {
+        db = this.getWritableDatabase();
+        db.delete(USERS_TABLE, COLUMN_ID + "=" + id, null);
+        db.close();// close the database
     }
 }

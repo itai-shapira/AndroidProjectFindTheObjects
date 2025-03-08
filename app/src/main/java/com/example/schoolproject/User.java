@@ -53,6 +53,11 @@ public class User {
         return foundObjects_arr;
     }
     public String getFoundObjectsString() {
-        return userFoundObjects;
+        int alreadyFound = 0;
+        for (int i = 0; i < userFoundObjects.length(); i++) {
+            if ((int)userFoundObjects.charAt(i) == 1)
+                alreadyFound++;
+        }
+        return "" + alreadyFound + "/" + userFoundObjects.length();
     }
 }

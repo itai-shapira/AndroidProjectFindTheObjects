@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UserDetailsActivity">
+    tools:context=".PhotoActivity">
 
     <Button
         android:id="@+id/btMainActivity"
@@ -49,11 +49,11 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/tvDraws"
+        android:id="@+id/tvFound"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textSize="30dp"
-        android:text="Draws: 0" />
+        android:text="" />
 </LinearLayout>

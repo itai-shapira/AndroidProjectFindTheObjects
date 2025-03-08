@@ -28,7 +28,7 @@
             android:name=".UsersActivity"
             android:exported="false" />
         <activity
-            android:name=".UserDetailsActivity"
+            android:name=".PhotoActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

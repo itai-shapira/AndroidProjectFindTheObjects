@@ -8,9 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.schoolproject.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
@@ -65,7 +62,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
             userNameTextView = itemView.findViewById(R.id.tvUserName);
             player1WinsTextView = itemView.findViewById(R.id.tvPlayer1Wins);
             player2WinsTextView = itemView.findViewById(R.id.tvPlayer2Wins);
-            drawsTextView = itemView.findViewById(R.id.tvDraws);
+            drawsTextView = itemView.findViewById(R.id.tvFound);
         }
     }
 }
