@@ -2,7 +2,7 @@ package com.example.schoolproject;
 
 // Handles Users
 public class User {
-    private String userName, userPwd, userLastName, userPhone;
+    private String userName, userPwd, userPhone;
     private Boolean[] userFoundObjects;
 
     public User(String userName, String userPwd, String userPhone, Boolean[] userFoundObjects) {
@@ -15,7 +15,6 @@ public class User {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
-        userFoundObjects = new Boolean[6];
     }
     public User(String userName, String userPwd) {
         this.userName = userName;
