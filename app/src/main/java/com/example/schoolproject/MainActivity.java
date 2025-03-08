@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Button btUsers;
     Button btIntroActivity;
     TextView tvWelcome;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         btIntroActivity = findViewById(R.id.btIntroActivity);
         tvWelcome = findViewById(R.id.tvWelcome);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         tvWelcome.setText("Welcome " + sharedPreferences.getString("username", "DefaultName"));
 
 
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
             // Logs out and navigates to the Intro screen
             @Override
             public void onClick(View v) {
+                editor.remove("username");
+                editor.apply();
+
                 Intent intent = new Intent(MainActivity.this, IntroActivity.class);
                 startActivity(intent);
             }
