@@ -52,14 +52,7 @@ public class User {
         }
         return foundObjects_arr;
     }
-//    public void setFoundObjects(Boolean[] foundObjects_arr) {
-//        String strFoundObjects = "";
-//        for (boolean b : foundObjects_arr) {
-//            if (b)
-//                strFoundObjects = strFoundObjects + 1;
-//            else
-//                strFoundObjects = strFoundObjects + 0;
-//        }
-//        userFoundObjects = strFoundObjects;
-//    }
+    public String getFoundObjectsString() {
+        return userFoundObjects;
+    }
 }

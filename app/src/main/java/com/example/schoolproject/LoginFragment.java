@@ -20,10 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 public class LoginFragment extends Fragment {
-    Button btRecoverPasswordFragment;
+    Button btIntroActivity, btLogin, btRegisterFragment, btRecoverPasswordFragment;
+    EditText etUserNameLogin, etPwdLogin;
+    TextView tvError;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -38,11 +41,12 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        Button btIntroActivity = view.findViewById(R.id.btIntroActivity);
-        EditText etUserNameLogin = view.findViewById(R.id.etUserNameLogin);
-        EditText etPwdLogin = view.findViewById(R.id.etPwdLogin);
-        Button btLogin = view.findViewById(R.id.btLogin);
-        Button btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
+        btIntroActivity = view.findViewById(R.id.btIntroActivity);
+        etUserNameLogin = view.findViewById(R.id.etUserNameLogin);
+        etPwdLogin = view.findViewById(R.id.etPwdLogin);
+        btLogin = view.findViewById(R.id.btLogin);
+        tvError = view.findViewById(R.id.tvError);
+        btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
         btRecoverPasswordFragment = view.findViewById(R.id.btRecoverPasswordFragment);
 
         Context context = getActivity();
@@ -54,25 +58,25 @@ public class LoginFragment extends Fragment {
         User user = new User("", "");
 
         btLogin.setOnClickListener(new View.OnClickListener() {
-            // Logs-in the user (NOT DONE YET)
+            // Logs-in the user
             @Override
             public void onClick(View v) {
-                user.setUserName(etUserNameLogin.getText().toString());
-                user.setUserPwd(etPwdLogin.getText().toString());
+                String userName = etUserNameLogin.getText().toString();
+                String userPwd = etPwdLogin.getText().toString();
 
-                ArrayList<User> users = helperDB.getAllRecords();
+                User user = helperDB.getRecord(userName);
 
-                for (User u : users) {
-                    if (user.getUserName().equals(u.getUserName())) {
-                        if (user.getUserPwd().equals(u.getUserPwd())) {
-                            editor.putString("username", user.getUserName());
-                            editor.apply();
+                if (user != null) {
+                    if (userPwd.equals(user.getUserPwd())) {
+                        editor.putString("username", userName);
+                        editor.apply();
 
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                }
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    } else
+                        tvError.setText("Incorrect Password");
+                } else
+                    tvError.setText("User does not exist");
             }
         });
 

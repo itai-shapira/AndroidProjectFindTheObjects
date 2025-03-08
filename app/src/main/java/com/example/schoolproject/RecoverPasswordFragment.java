@@ -15,13 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RecoverPasswordFragment extends Fragment {
     private static final int SEND_SMS = 0;
     Button btLoginFragment, btSendSMS;
     EditText etUserName;
-    HelperDB helperDB;
+    TextView tvError;
 
     public RecoverPasswordFragment() {
         // Required empty public constructor
@@ -43,8 +44,9 @@ public class RecoverPasswordFragment extends Fragment {
         btLoginFragment = view.findViewById(R.id.btLoginFragment);
         etUserName = view.findViewById(R.id.etUserName);
         btSendSMS = view.findViewById(R.id.btSendSMS);
+        tvError = view.findViewById(R.id.tvError);
 
-        helperDB =  new HelperDB(getActivity());
+        HelperDB helperDB =  new HelperDB(getActivity());
 
         btLoginFragment.setOnClickListener(new View.OnClickListener() {
             // Navigates to the Login screen
@@ -72,7 +74,8 @@ public class RecoverPasswordFragment extends Fragment {
                     transaction.replace(R.id.fragment_container, new LoginFragment());
                     transaction.addToBackStack(null);
                     transaction.commit();
-                }
+                } else
+                    tvError.setText("User does not exist");
             }
         });
 

@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class RegisterFragment extends Fragment {
     Button btIntroActivity, btRegister, btLoginFragment;
     EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etPhoneRegister;
+    TextView tvError;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -38,32 +40,41 @@ public class RegisterFragment extends Fragment {
         etPwdCheckRegister = view.findViewById(R.id.etPwdCheckRegister);
         etPhoneRegister = view.findViewById(R.id.etPhoneRegister);
         btRegister = view.findViewById(R.id.btRegister);
+        tvError = view.findViewById(R.id.tvError);
         btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
         HelperDB helperDB = new HelperDB(getActivity());
-
-        User user = new User("", "", "");
 
         btRegister.setOnClickListener(new View.OnClickListener() {
             // Registers user, adds their info to the database and navigates to the Main screen
             @Override
             public void onClick(View v) {
-                user.setUserName(etUserNameRegister.getText().toString());
-                user.setUserPwd(etPwdRegister.getText().toString());
-                user.setUserPhone(etPhoneRegister.getText().toString());
+                String userName, userPwd, userPwdCheck, userPhone;
+                userName = etUserNameRegister.getText().toString();
+                userPwd = etPwdRegister.getText().toString();
+                userPwdCheck = etPwdCheckRegister.getText().toString();
+                userPhone = etPhoneRegister.getText().toString();
 
-                ContentValues cv = new ContentValues();
-                cv.put(helperDB.USER_NAME,user.getUserName());
-                cv.put(helperDB.USER_PWD,user.getUserPwd());
-                cv.put(helperDB.USER_PHONE,user.getUserPhone());
-                cv.put(helperDB.USER_FOUND_OBJECTS,user.getUserFoundObjects());
+                if (helperDB.getRecord(userName) == null) {
+                    if (userPwd.equals(userPwdCheck)) {
+                        User user = new User(userName, userPwd, userPhone);
 
-                SQLiteDatabase db = helperDB.getWritableDatabase();
-                db.insert(helperDB.USERS_TABLE, null, cv);
-                db.close();
+                        ContentValues cv = new ContentValues();
+                        cv.put(helperDB.USER_NAME, user.getUserName());
+                        cv.put(helperDB.USER_PWD, user.getUserPwd());
+                        cv.put(helperDB.USER_PHONE, user.getUserPhone());
+                        cv.put(helperDB.USER_FOUND_OBJECTS, user.getUserFoundObjects());
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                        SQLiteDatabase db = helperDB.getWritableDatabase();
+                        db.insert(helperDB.USERS_TABLE, null, cv);
+                        db.close();
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    } else
+                        tvError.setText("Passwords do not match");
+                } else
+                    tvError.setText("Username already exists");
             }
         });
 
