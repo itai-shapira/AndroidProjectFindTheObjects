@@ -18,9 +18,7 @@ public class UsersActivity extends AppCompatActivity {
     RecyclerView usersRecyclerView;
     UsersAdapter usersAdapter;
     ArrayList<String> userNameList;
-    ArrayList<Integer> player1WinsList;
-    ArrayList<Integer> player2WinsList;
-    ArrayList<Integer> drawsList;
+    ArrayList<String> userFoundObjectsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +40,21 @@ public class UsersActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         userNameList = new ArrayList<String>();
-        player1WinsList = new ArrayList<Integer>();
-        player2WinsList = new ArrayList<Integer>();
-        drawsList = new ArrayList<Integer>();
+        userFoundObjectsList = new ArrayList<String>();
 
-        userNameList.add("name1");
-        userNameList.add("name2");
-        player1WinsList.add(1);
-        player1WinsList.add(2);
-        player2WinsList.add(5);
-        player2WinsList.add(8);
-        drawsList.add(0);
-        drawsList.add(10);
+        HelperDB helperDB = new HelperDB(UsersActivity.this);
+        ArrayList<User> users = helperDB.getAllRecords();
+        for (User user : users) {
+            userNameList.add(user.getUserName());
+            userFoundObjectsList.add(user.getFoundObjectsString());
+        }
 
         // Set up the RecyclerView
         usersRecyclerView = findViewById(R.id.usersRecyclerView);
         // Defines to the RecyclerView how to order the items
         usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Pass the list of Users to class UsersAdapter
-        usersAdapter = new UsersAdapter(userNameList, player1WinsList, player2WinsList, drawsList);
+        usersAdapter = new UsersAdapter(userNameList, userFoundObjectsList);
         usersRecyclerView.setAdapter(usersAdapter);
         usersAdapter.notifyDataSetChanged();
     }

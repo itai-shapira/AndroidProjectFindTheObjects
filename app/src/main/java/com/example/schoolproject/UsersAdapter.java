@@ -12,15 +12,11 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
     private List<String> UserNameList;
-    private List<Integer> Player1WinsList;
-    private List<Integer> Player2WinsList;
-    private List<Integer> DrawsList;
+    private List<String> UserFoundObjectsList;
 
-    public UsersAdapter(List<String> UserNameList, List<Integer> Player1WinsList, List<Integer> Player2WinsList, List<Integer> DrawsList) {
+    public UsersAdapter(List<String> UserNameList, List<String> UserFoundObjects) {
         this.UserNameList = UserNameList;
-        this.Player1WinsList = Player1WinsList;
-        this.Player2WinsList = Player2WinsList;
-        this.DrawsList = DrawsList;
+        this.UserFoundObjectsList = UserFoundObjects;
     }
 
     @NonNull
@@ -36,14 +32,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     @Override
     public void onBindViewHolder(UsersViewHolder holder, int position) {
         String userName = UserNameList.get(position);
-        String player1Wins = "Player 1 Wins: " + Player1WinsList.get(position);
-        String player2Wins = "Player 2 wins: " + Player2WinsList.get(position);
-        String draws = "Draws: " + DrawsList.get(position);
+        String userFoundObjects = "Found: " + UserFoundObjectsList.get(position);
 
         holder.userNameTextView.setText(userName);
-        holder.player1WinsTextView.setText(player1Wins);
-        holder.player2WinsTextView.setText(player2Wins);
-        holder.drawsTextView.setText(draws);
+        holder.userFoundObjectsView.setText(userFoundObjects);
     }
 
     @Override
@@ -53,16 +45,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
         TextView userNameTextView;
-        TextView player1WinsTextView;
-        TextView player2WinsTextView;
-        TextView drawsTextView;
+        TextView userFoundObjectsView;
 
         public UsersViewHolder(View itemView) {
             super(itemView);
             userNameTextView = itemView.findViewById(R.id.tvUserName);
-            player1WinsTextView = itemView.findViewById(R.id.tvPlayer1Wins);
-            player2WinsTextView = itemView.findViewById(R.id.tvPlayer2Wins);
-            drawsTextView = itemView.findViewById(R.id.tvFound);
+            userFoundObjectsView = itemView.findViewById(R.id.tvUserFoundObjects);
         }
     }
 }
