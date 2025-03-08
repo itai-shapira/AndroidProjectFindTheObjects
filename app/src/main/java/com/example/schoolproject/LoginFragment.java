@@ -19,12 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -79,6 +73,8 @@ public class LoginFragment extends Fragment {
         Button btLogin = view.findViewById(R.id.btLogin);
         Button btRegisterFragment = view.findViewById(R.id.btRegisterFragment);
 
+        HelperDB helperDB = new HelperDB(getActivity());
+
         User user = new User("", "");
 
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +84,16 @@ public class LoginFragment extends Fragment {
                 user.setUserName(etUserNameLogin.getText().toString());
                 user.setUserPwd(etPwdLogin.getText().toString());
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                ArrayList<User> users = helperDB.getAllRecords();
+
+                for (User u : users) {
+                    if (user.getUserName().equals(u.getUserName())) {
+                        if (user.getUserPwd().equals(u.getUserPwd())) {
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }
             }
         });
 

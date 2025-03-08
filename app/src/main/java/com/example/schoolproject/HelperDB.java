@@ -43,14 +43,14 @@ public class HelperDB extends SQLiteOpenHelper {
     }
 
     // Reads and returns the data from the Users table
-    public ArrayList<User> getAllRecords(HelperDB helperDB) {
+    public ArrayList<User> getAllRecords() {
         SQLiteDatabase db;
         int index;
         String name, pwd, phone;
-        db = helperDB.getReadableDatabase();
+        db = this.getReadableDatabase();
         ArrayList<User> list = new ArrayList<>();
 
-        Cursor cursor = db.query(helperDB.USERS_TABLE, null, null, null, null, null, null);
+        Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             index = cursor.getColumnIndex(USER_NAME);
