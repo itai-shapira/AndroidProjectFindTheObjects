@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,12 +61,12 @@ public class PhotoActivity extends AppCompatActivity {
         HelperDB helperDB = new HelperDB(PhotoActivity.this);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
 
-        tvFound.setText("Found: " + currentUser.getFoundObjectsString());
+        String stFound = "Found: " + currentUser.getFoundObjectsString();
+        tvFound.setText(stFound);
 
-        // Creating the ActivityResultLauncher (takes a photo, classifies it using ai, and updates the database according to the results)
+        // Creating the ActivityResultLauncher (takes a photo, classifies it using AI, and updates the database according to the results)
         arLauncher = registerForActivityResult(
 
                 new ActivityResultContracts.StartActivityForResult(),
@@ -77,10 +78,10 @@ public class PhotoActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                         ivPhoto.setImageBitmap(bitmap);
-                        // ivPhoto.setImageBitmap(result.getData().getParcelableExtra("data"));
                         bitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_SIZE, IMAGE_SIZE, false);
                         int max = classifyImage(bitmap);
 
+                        // Updates the amount of objects the user has found to the database
                         String userName = currentUser.getUserName();
                         String userFoundObjects = currentUser.getUserFoundObjects();
                         String newUserFoundObjects = "";
@@ -92,8 +93,10 @@ public class PhotoActivity extends AppCompatActivity {
                                 newUserFoundObjects += "0";
                         }
 
+                        // Deletes the old data from database
                         helperDB.deleteUserByRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1);
 
+                        // Inserts the new data to the database
                         ContentValues cv = new ContentValues();
                         cv.put(helperDB.USER_NAME, currentUser.getUserName());
                         cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
@@ -104,7 +107,8 @@ public class PhotoActivity extends AppCompatActivity {
                         db.insert(helperDB.USERS_TABLE, null, cv);
                         db.close(); // closes the Database
 
-                        tvFound.setText("Found: " + helperDB.getRecord(userName).getFoundObjectsString());
+                        String stFound = "Found: " + helperDB.getRecord(userName).getFoundObjectsString();
+                        tvFound.setText(stFound);
                     } });
 
         // Navigates to the Main screen when the button is pressed
@@ -124,6 +128,7 @@ public class PhotoActivity extends AppCompatActivity {
             }});
     }
     // Classifies an image using the ai model
+    @SuppressLint("DefaultLocale")
     private int classifyImage(Bitmap bitmap) {
         try {
             ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());

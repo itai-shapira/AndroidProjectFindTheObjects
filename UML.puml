@@ -1,0 +1,95 @@
+@startuml
+class ExampleUnitTest {
+}
+class PhotoActivity {
+~ Button btCamera
+~ ImageView ivPhoto
+~ TextView tvResult
+~ ActivityResultLauncher<Intent> arLauncher
+~ int IMAGE_SIZE
+}
+
+class UsersActivity {
+~ Button btMainActivity
+~ RecyclerView usersRecyclerView
+~ UsersAdapter usersAdapter
+~ ArrayList<String> userNameList
+~ ArrayList<String> userFoundObjectsList
+}
+
+class LoginFragment {
+~ Button btIntroActivity
+~ EditText etUserNameLogin
+~ TextView tvError
+~ HelperDB helperDB
+}
+
+class RegisterFragment {
+~ Button btIntroActivity
+~ EditText etUserNameRegister
+~ TextView tvError
+}
+
+class UsersAdapter {
+- List<String> UserNameList
+- List<String> UserFoundObjectsList
+}
+
+class UsersAdapter$UsersViewHolder {
+~ TextView userNameTextView
+~ TextView userFoundObjectsView
+}
+
+class MainActivity {
+~ Button btPhotoActivity
+~ TextView tvWelcome
+}
+
+class LoginActivity {
+}
+class User {
+~ String[] OBJECTS
+- String userName
+}
+
+class RecoverPasswordFragment {
+- {static} int SEND_SMS
+~ Button btLoginFragment
+~ EditText etUserName
+~ TextView tvError
+}
+
+class IntroActivity {
+~ Button btLoginFragment
+~ SharedPreferences sharedPreferences
+~ String currentUser
+~ String DEFAULT_NAME
+}
+
+class ExampleInstrumentedTest {
+}
+class HelperDB {
++ {static} String DB_FILE
++ {static} String USERS_TABLE
++ {static} String USER_NAME
++ {static} String USER_PWD
++ {static} String USER_PHONE
++ {static} String USER_FOUND_OBJECTS
+~ SQLiteDatabase db
+}
+
+
+
+AppCompatActivity <|-- PhotoActivity
+AppCompatActivity <|-- UsersActivity
+Fragment <|-- LoginFragment
+Fragment <|-- RegisterFragment
+Adapter <|-- UsersAdapter
+UsersAdapter +.. UsersAdapter$UsersViewHolder
+ViewHolder <|-- UsersAdapter$UsersViewHolder
+AppCompatActivity <|-- MainActivity
+AppCompatActivity <|-- LoginActivity
+Fragment <|-- RecoverPasswordFragment
+AppCompatActivity <|-- IntroActivity
+SQLiteOpenHelper <|-- HelperDB
+@enduml
