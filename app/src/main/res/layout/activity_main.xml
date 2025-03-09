@@ -40,14 +40,14 @@
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="40dp"
         android:text="Take a Photo" />
 
     <Button
         android:id="@+id/btUsers"
         android:layout_gravity="center"
         android:layout_width="200dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:text="User Stats" />
 </LinearLayout>
