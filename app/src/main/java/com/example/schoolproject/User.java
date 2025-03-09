@@ -2,6 +2,7 @@ package com.example.schoolproject;
 
 // Handles the app's ssers
 public class User {
+    final String[] OBJECTS = {"Umbrella", "Plastic Bottle", "Calculator", "Glasses", "Pencil", "Notebook"};
     private String userName, userPwd, userPhone, userFoundObjects;
 
     // Constructor
@@ -62,10 +63,22 @@ public class User {
     public String getFoundObjectsString() {
         int alreadyFound = 0;
         for (int i = 0; i < userFoundObjects.length(); i++) {
-            if (userFoundObjects.charAt(i) == '1') {
+            if (userFoundObjects.charAt(i) == '1')
                 alreadyFound++;
-            }
         }
         return "" + alreadyFound + "/" + userFoundObjects.length();
+    }
+    // Returns which specific objects have been found
+    public String getFoundObjectsNames() {
+        String output = "";
+        for (int i = 0; i < OBJECTS.length; i++) {
+            output += OBJECTS[i] + ": ";
+            if (userFoundObjects.charAt(i) == '1')
+                output += "Found. ";
+            else
+                output += "Not Found. ";
+
+        }
+        return output;
     }
 }

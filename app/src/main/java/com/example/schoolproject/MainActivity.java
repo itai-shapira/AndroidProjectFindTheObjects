@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button btPhotoActivity, btUsers, btIntroActivity;
-    TextView tvWelcome;
+    TextView tvWelcome, tvFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +24,18 @@ public class MainActivity extends AppCompatActivity {
         btUsers = findViewById(R.id.btUsers);
         btIntroActivity = findViewById(R.id.btIntroActivity);
         tvWelcome = findViewById(R.id.tvWelcome);
+        tvFound = findViewById(R.id.tvFound);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        tvWelcome.setText("Welcome " + sharedPreferences.getString("username", "DefaultName"));
+        String currentUsserName = sharedPreferences.getString("username", "DefaultName");
+
+        tvWelcome.setText("Welcome " + currentUsserName);
+
+        HelperDB helperDB = new HelperDB(MainActivity.this);
+
+        User currentUser = helperDB.getRecord(currentUsserName);
+        tvFound.setText(currentUser.getFoundObjectsNames());
 
         // Logs-out the user and navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {

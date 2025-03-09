@@ -26,6 +26,15 @@
         android:textSize="50dp"
         android:text="Welcome" />
 
+    <TextView
+        android:id="@+id/tvFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="Found" />
+
     <Button
         android:id="@+id/btPhotoActivity"
         android:layout_gravity="center"
