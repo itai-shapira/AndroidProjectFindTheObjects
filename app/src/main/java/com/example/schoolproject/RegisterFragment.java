@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-// The screen whre the user regsters to the app
+// The screen where the user registers to the app
 public class RegisterFragment extends Fragment {
     Button btIntroActivity, btRegister, btLoginFragment;
     EditText etUserNameRegister, etPwdRegister, etPwdCheckRegister, etPhoneRegister;

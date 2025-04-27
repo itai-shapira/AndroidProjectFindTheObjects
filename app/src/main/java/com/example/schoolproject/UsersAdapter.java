@@ -47,7 +47,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         return UserNameList.size();
     }
 
-    // Class that handles connecting to the RecycerView xml file
+    // Class that handles connecting to the RecyclerView xml file
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
         TextView userNameTextView;
         TextView userFoundObjectsView;

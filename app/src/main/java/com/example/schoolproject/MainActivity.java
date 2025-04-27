@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String currentUsserName = sharedPreferences.getString("username", "DefaultName");
+        String currentUserName = sharedPreferences.getString("username", "DefaultName");
 
-        tvWelcome.setText("Welcome " + currentUsserName);
+        tvWelcome.setText("Welcome " + currentUserName);
 
         HelperDB helperDB = new HelperDB(MainActivity.this);
 
-        User currentUser = helperDB.getRecord(currentUsserName);
+        User currentUser = helperDB.getRecord(currentUserName);
         tvFound.setText(currentUser.getFoundObjectsNames());
 
         // Logs-out the user and navigates to the Intro screen when the button is pressed

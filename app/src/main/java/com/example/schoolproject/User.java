@@ -1,6 +1,6 @@
 package com.example.schoolproject;
 
-// Handles the app's ssers
+// Handles the app's users
 public class User {
     final String[] OBJECTS = {"Umbrella", "Plastic Bottle", "Calculator", "Glasses", "Pencil", "Notebook"};
     private String userName, userPwd, userPhone, userFoundObjects;
