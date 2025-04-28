@@ -1,11 +1,18 @@
 package com.example.schoolproject;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -28,20 +35,33 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
-public class PhotoActivity extends AppCompatActivity {
+public class PhotoFragment extends Fragment {
 
-    Button btCamera, btMainActivity;
+    Button btCamera, btGameFragment;
     ImageView ivPhoto;
     TextView tvResult, tvConfidence, tvFound;
     ActivityResultLauncher<Intent> arLauncher;
     final int IMAGE_SIZE = 224;
 
+    public PhotoFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo);
-        ActivityCompat.requestPermissions(this,
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_photo, container, false);
+
+        ActivityCompat.requestPermissions(getActivity(),
 
                 new String[]{android.Manifest.permission.CAMERA,
 
@@ -51,16 +71,17 @@ public class PhotoActivity extends AppCompatActivity {
 
                 1);
 
-        btCamera = findViewById(R.id.btCamera);
-        ivPhoto = findViewById(R.id.ivPhoto);
-        btMainActivity = findViewById(R.id.btMainActivity);
-        tvResult = findViewById(R.id.tvResult);
-        tvConfidence = findViewById(R.id.tvConfidence);
-        tvFound = findViewById(R.id.tvFound);
+        btCamera = view.findViewById(R.id.btCamera);
+        ivPhoto = view.findViewById(R.id.ivPhoto);
+        btGameFragment = view.findViewById(R.id.btGameFragment);
+        tvResult = view.findViewById(R.id.tvResult);
+        tvConfidence = view.findViewById(R.id.tvConfidence);
+        tvFound = view.findViewById(R.id.tvFound);
 
-        HelperDB helperDB = new HelperDB(PhotoActivity.this);
+        HelperDB helperDB = new HelperDB(getActivity());
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        Context context = getActivity();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
         User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
 
         String stFound = "Found: " + currentUser.getFoundObjectsString();
@@ -108,13 +129,16 @@ public class PhotoActivity extends AppCompatActivity {
                         tvFound.setText(stFound);
                     } });
 
-        // Navigates to the Main screen when the button is pressed
-        btMainActivity.setOnClickListener(new View.OnClickListener() {
+        // Navigates to the Game screen when the button is pressed
+        btGameFragment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PhotoActivity.this, MainActivity.class);
-                startActivity(intent);
-            }});
+            public void onClick(View v) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new GameFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         // Takes a photo using the phone's camera
         btCamera.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +147,14 @@ public class PhotoActivity extends AppCompatActivity {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 arLauncher.launch(intent);
             }});
+
+        return view;
     }
-    // Classifies an image using the ai model
+
     @SuppressLint("DefaultLocale")
     private int classifyImage(Bitmap bitmap) {
         try {
-            ModelUnquant model = ModelUnquant.newInstance(getApplicationContext());
+            ModelUnquant model = ModelUnquant.newInstance(getActivity().getApplicationContext());
 
             // Create inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);

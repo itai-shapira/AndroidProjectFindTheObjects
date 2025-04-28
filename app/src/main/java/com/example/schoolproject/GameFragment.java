@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class GameFragment extends Fragment {
         if (!gameInProgress)
             startGame();
 
+
         // Navigates to the Main screen when the button is pressed
         btMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +63,10 @@ public class GameFragment extends Fragment {
         btPhotoActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PhotoActivity.class);
-                startActivity(intent);
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new PhotoFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -70,7 +74,6 @@ public class GameFragment extends Fragment {
     }
 
     // Initializes a new game
-    @SuppressLint("DefaultLocale")
     private void startGame() {
         // Random objects to find (TO DO)
         int[] rndObjects_arr = {0, 1, 2, 3};
@@ -87,8 +90,10 @@ public class GameFragment extends Fragment {
         }
         editor.apply();
 
-        // Navigates to the Main screen
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
+        // Navigates to the Instructions screen
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new InstructionsFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
