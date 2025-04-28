@@ -47,8 +47,30 @@ public class GameFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         boolean gameInProgress = sharedPreferences.getBoolean("game_in_progress", false);
 
+        // Check if there is a game in progress and starts one if there isn't
         if (!gameInProgress)
             startGame();
+
+        boolean object0, object1, object2, object3;
+        object0 = sharedPreferences.getBoolean("object_found0", false);
+        object1 = sharedPreferences.getBoolean("object_found1", false);
+        object2 = sharedPreferences.getBoolean("object_found2", false);
+        object3 = sharedPreferences.getBoolean("object_found3", false);
+
+        tvFound.setText("Object0: " + object0 + ", Object1: " + object1 + ", Object2: " + object2 + ", Object3: " + object3);
+
+        // Checks if the win requirements have been met
+        if (object0 && object1 && object2 && object3) {
+            editor.putBoolean("game_in_progress", false);
+            editor.apply();
+            // TO-DO: ADD WIN LOGIC TO DATABASE
+
+            // Navigates to the Win screen
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new WinFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
 
 
         // Navigates to the Main screen when the button is pressed
@@ -86,7 +108,7 @@ public class GameFragment extends Fragment {
         editor.putBoolean("game_in_progress", true);
         for (int i = 0; i < rndObjects_arr.length; i++) {
             editor.putInt("object" + i, rndObjects_arr[i]);
-            editor.putBoolean("object" + i + "_found", false);
+            editor.putBoolean("object_found" + i, false);
         }
         editor.apply();
 

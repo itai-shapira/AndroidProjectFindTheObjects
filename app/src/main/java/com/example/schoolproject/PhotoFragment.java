@@ -82,6 +82,7 @@ public class PhotoFragment extends Fragment {
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
 
         String stFound = "Found: " + currentUser.getFoundObjectsString();
@@ -102,7 +103,13 @@ public class PhotoFragment extends Fragment {
                         bitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_SIZE, IMAGE_SIZE, false);
                         int max = classifyImage(bitmap);
 
-                        // Updates the amount of objects the user has found to the database
+                        // Updates the object  found to Shared Preferences
+                        for (int i = 0; i < 4; i++) {
+                            if (sharedPreferences.getInt("object" + i, -1) == max)
+                                editor.putBoolean("object_found" + i, true);
+                        }
+                        editor.apply();
+
                         String userName = currentUser.getUserName();
                         /*
                         String userFoundObjects = currentUser.getUserFoundObjects();
