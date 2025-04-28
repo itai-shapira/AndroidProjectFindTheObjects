@@ -83,6 +83,7 @@ public class PhotoActivity extends AppCompatActivity {
 
                         // Updates the amount of objects the user has found to the database
                         String userName = currentUser.getUserName();
+                        /*
                         String userFoundObjects = currentUser.getUserFoundObjects();
                         String newUserFoundObjects = "";
 
@@ -93,19 +94,17 @@ public class PhotoActivity extends AppCompatActivity {
                                 newUserFoundObjects += "0";
                         }
 
-                        // Deletes the old data from database
-                        helperDB.deleteUserByRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1);
-
                         // Inserts the new data to the database
                         ContentValues cv = new ContentValues();
+
                         cv.put(helperDB.USER_NAME, currentUser.getUserName());
                         cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
                         cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
                         cv.put(helperDB.USER_FOUND_OBJECTS, newUserFoundObjects);
 
-                        SQLiteDatabase db = helperDB.getWritableDatabase();
-                        db.insert(helperDB.USERS_TABLE, null, cv);
-                        db.close(); // closes the Database
+                        // Deletes the old data from database
+                        helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1, cv);
+                        */
 
                         String stFound = "Found: " + helperDB.getRecord(userName).getFoundObjectsString();
                         tvFound.setText(stFound);
@@ -162,7 +161,7 @@ public class PhotoActivity extends AppCompatActivity {
                     max = i;
                 }
             }
-            String[] classes = {"Umbrella", "Plastic Bottle", "Calculator", "Glasses", "Pencil", "Notebook"};
+            String[] classes = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
             tvResult.setText(classes[max]);
             tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
             // Releases model resources if no longer used.

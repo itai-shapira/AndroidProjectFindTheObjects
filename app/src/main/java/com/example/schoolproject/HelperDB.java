@@ -1,5 +1,6 @@
 package com.example.schoolproject;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,10 +82,11 @@ public class HelperDB extends SQLiteOpenHelper {
     }
 
     // Deletes a row from the database
-    public void deleteUserByRow(long id) {
+    public void updateRow(long id, ContentValues cv) {
         db = this.getWritableDatabase();
         Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);
-        db.delete(USERS_TABLE, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
+        // db.delete(USERS_TABLE, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
+        db.update(USERS_TABLE, cv, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
         db.close();// close the database
     }
 }
