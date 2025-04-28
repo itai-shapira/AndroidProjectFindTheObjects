@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editor.remove("username");
+                editor.putBoolean("game_in_progress", false);
                 editor.apply();
 
                 Intent intent = new Intent(MainActivity.this, IntroActivity.class);

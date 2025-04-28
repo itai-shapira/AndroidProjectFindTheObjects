@@ -101,8 +101,6 @@ public class PhotoActivity extends AppCompatActivity {
                         cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
                         cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
                         cv.put(helperDB.USER_FOUND_OBJECTS, newUserFoundObjects);
-
-                        // Deletes the old data from database
                         helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1, cv);
                         */
 

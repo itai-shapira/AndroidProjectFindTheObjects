@@ -53,7 +53,6 @@ public class LoginFragment extends Fragment {
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         HelperDB helperDB = new HelperDB(getActivity());
 
@@ -70,6 +69,7 @@ public class LoginFragment extends Fragment {
 
                 if (user != null) {
                     if (userPwd.equals(user.getUserPwd())) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", userName);
                         editor.apply();
 
