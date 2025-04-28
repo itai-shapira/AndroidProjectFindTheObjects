@@ -12,7 +12,7 @@ import android.widget.TextView;
 // The main screen of the app
 public class MainActivity extends AppCompatActivity {
 
-    Button btPhotoActivity, btUsers, btIntroActivity;
+    Button btGameFragment, btUsers, btIntroActivity;
     TextView tvWelcome, tvFound;
 
     @Override
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btPhotoActivity = findViewById(R.id.btPhotoActivity);
+        btGameFragment = findViewById(R.id.btGameFragment);
         btUsers = findViewById(R.id.btUsers);
         btIntroActivity = findViewById(R.id.btIntroActivity);
         tvWelcome = findViewById(R.id.tvWelcome);
@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        // Navigates to the Photo screen when the button is pressed
-        btPhotoActivity.setOnClickListener(new View.OnClickListener() {
+        // Navigates to the Game screen when the button is pressed
+        btGameFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });

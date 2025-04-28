@@ -36,12 +36,12 @@
         android:text="Found" />
 
     <Button
-        android:id="@+id/btPhotoActivity"
+        android:id="@+id/btGameFragment"
         android:layout_gravity="center"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Take a Photo" />
+        android:text="Game" />
 
     <Button
         android:id="@+id/btUsers"
