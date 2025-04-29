@@ -2,6 +2,8 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -102,13 +104,21 @@ public class PhotoFragment extends Fragment {
                         bitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_SIZE, IMAGE_SIZE, false);
                         int max = classifyImage(bitmap);
 
-                        // Updates the object  found to Shared Preferences
+                        // Update the object found to Shared Preferences
                         for (int i = 0; i < 4; i++) {
                             if (sharedPreferences.getInt("object" + i, -1) == max)
                                 editor.putBoolean("object_found" + i, true);
                         }
+
+                        // Check if all objects have been found
+                        boolean foundAll = true;
+                        for (int i = 0; i < 4; i++) {
+
+                        }
                         editor.apply();
+
                         updateProgress();
+                        checkWin();
                     } });
 
         // Navigates to the Game screen when the button is pressed
@@ -190,5 +200,41 @@ public class PhotoFragment extends Fragment {
         }
 
         pbProgress.setProgress(objectsFound * 25);
+    }
+
+    // Check if all objects have been found and trigger a win if they have
+    private void checkWin() {
+        HelperDB helperDB = new HelperDB(getActivity());
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
+
+        boolean foundAll = true;
+        for (int i = 0; i < 4; i++) {
+            if (!sharedPreferences.getBoolean("object_found" + i, false))
+                foundAll = false;
+        }
+
+        if (foundAll) {
+            editor.putBoolean("game_in_progress", false);
+            editor.apply();
+
+            // Updates the Database
+            int userGamesWon = parseInt(currentUser.getUserGamesWon()) + 1;
+            ContentValues cv = new ContentValues();
+
+            cv.put(helperDB.USER_NAME, currentUser.getUserName());
+            cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
+            cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
+            cv.put(helperDB.USER_GAMES_WON, userGamesWon);
+            helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(currentUser.getUserName())) + 1, cv);
+
+            // Navigates to the Win screen
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new WinFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }

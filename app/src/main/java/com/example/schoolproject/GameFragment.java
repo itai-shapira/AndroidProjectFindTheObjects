@@ -64,12 +64,7 @@ public class GameFragment extends Fragment {
         cbObject2 = view.findViewById(R.id.cbObject2);
         cbObject3 = view.findViewById(R.id.cbObject3);
 
-        HelperDB helperDB = new HelperDB(getActivity());
-
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
         boolean gameInProgress = sharedPreferences.getBoolean("game_in_progress", false);
 
         // Check if there is a game in progress and starts one if there isn't
@@ -94,27 +89,6 @@ public class GameFragment extends Fragment {
         cbObject3.setText(CLASSES[objects[3]]);
         cbObject3.setChecked(objectsFound[3]);
 
-        // Checks if the win requirements have been met
-        if (objectsFound[0] && objectsFound[1] && objectsFound[2] && objectsFound[3]) {
-            editor.putBoolean("game_in_progress", false);
-            editor.apply();
-
-            // Updates the Database
-            int userGamesWon = parseInt(currentUser.getUserGamesWon()) + 1;
-            ContentValues cv = new ContentValues();
-
-            cv.put(helperDB.USER_NAME, currentUser.getUserName());
-            cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
-            cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
-            cv.put(helperDB.USER_GAMES_WON, userGamesWon);
-            helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(currentUser.getUserName())) + 1, cv);
-
-            // Navigates to the Win screen
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new WinFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
         // Navigates to the Main screen when the button is pressed
         btMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
