@@ -17,6 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 public class GameFragment extends Fragment {
 
     Button btPhotoActivity, btMainActivity;
@@ -32,10 +37,14 @@ public class GameFragment extends Fragment {
     }
 
     @Override
+    @SuppressLint("DefaultLocale")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
+
+        final String[] CLASSES = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
 
         btPhotoActivity = view.findViewById(R.id.btPhotoActivity);
         btMainActivity = view.findViewById(R.id.btMainActivity);
@@ -51,16 +60,18 @@ public class GameFragment extends Fragment {
         if (!gameInProgress)
             startGame();
 
-        boolean object0, object1, object2, object3;
-        object0 = sharedPreferences.getBoolean("object_found0", false);
-        object1 = sharedPreferences.getBoolean("object_found1", false);
-        object2 = sharedPreferences.getBoolean("object_found2", false);
-        object3 = sharedPreferences.getBoolean("object_found3", false);
+        // Get Shared Preferences Values
+        int[] objects = new int[4];
+        boolean[] objectsFound = new boolean[4];
+        for (int i = 0; i < objects.length; i++) {
+            objects[i] = sharedPreferences.getInt("object" + i, 0);
+            objectsFound[i] = sharedPreferences.getBoolean("object_found" + i, false);
+        }
 
-        tvFound.setText("Object0: " + object0 + ", Object1: " + object1 + ", Object2: " + object2 + ", Object3: " + object3);
+        tvFound.setText(objects[0] + ": " + objectsFound[0] + ", " + objects[1] + ": " + objectsFound[1] + ", " + objects[2] + ": " + objectsFound[2] + ", " + objects[3] + ": " + objectsFound[3]);
 
         // Checks if the win requirements have been met
-        if (object0 && object1 && object2 && object3) {
+        if (objectsFound[0] && objectsFound[1] && objectsFound[2] && objectsFound[3]) {
             editor.putBoolean("game_in_progress", false);
             editor.apply();
             // TO-DO: ADD WIN LOGIC TO DATABASE
@@ -97,8 +108,9 @@ public class GameFragment extends Fragment {
 
     // Initializes a new game
     private void startGame() {
-        // Random objects to find (TO DO)
-        int[] rndObjects_arr = {0, 1, 2, 3};
+        // Random objects to find
+        List<Integer> rndObjects = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        Collections.shuffle(rndObjects);
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
@@ -106,8 +118,8 @@ public class GameFragment extends Fragment {
         // Initialize shared preferences for new game
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("game_in_progress", true);
-        for (int i = 0; i < rndObjects_arr.length; i++) {
-            editor.putInt("object" + i, rndObjects_arr[i]);
+        for (int i = 0; i < 4; i++) {
+            editor.putInt("object" + i, rndObjects.get(i));
             editor.putBoolean("object_found" + i, false);
         }
         editor.apply();

@@ -161,6 +161,7 @@ public class PhotoFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private int classifyImage(Bitmap bitmap) {
         try {
+            final String[] CLASSES = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
             ModelUnquant model = ModelUnquant.newInstance(getActivity().getApplicationContext());
 
             // Create inputs for reference.
@@ -192,8 +193,7 @@ public class PhotoFragment extends Fragment {
                     max = i;
                 }
             }
-            String[] classes = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
-            tvResult.setText(classes[max]);
+            tvResult.setText(CLASSES[max]);
             tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
             // Releases model resources if no longer used.
             model.close();
