@@ -2,15 +2,14 @@ package com.example.schoolproject;
 
 // Handles the app's users
 public class User {
-    final String[] OBJECTS = {"Umbrella", "Plastic Bottle", "Calculator", "Glasses", "Pencil", "Notebook"};
-    private String userName, userPwd, userPhone, userFoundObjects;
+    private String userName, userPwd, userPhone, userGamesWon;
 
     // Constructor
-    public User(String userName, String userPwd, String userPhone, String userFoundObjects) {
+    public User(String userName, String userPwd, String userPhone, String userGamesWon) {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
-        this.userFoundObjects = userFoundObjects;
+        this.userGamesWon = userGamesWon;
     }
 
     // Constructor for the Register Activity
@@ -18,7 +17,7 @@ public class User {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
-        userFoundObjects = "000000";
+        userGamesWon = "0";
     }
 
     // Constructor for the login Activity
@@ -52,33 +51,11 @@ public class User {
         this.userPhone = userPhone;
     }
     // Returns the amount of objects the user has found (in the way it is saved in the database)
-    public String getUserFoundObjects() {
-        return userFoundObjects;
+    public String getUserGamesWon() {
+        return userGamesWon;
     }
     // Changes the amount of objects the user has found to input (saved in the way it is saved in the database)
-    public void setUserFoundObjects(String userFoundObjects) {
-        this.userFoundObjects = userFoundObjects;
-    }
-    // Returns the amount of objects the user has found out of the total objects
-    public String getFoundObjectsString() {
-        int alreadyFound = 0;
-        for (int i = 0; i < userFoundObjects.length(); i++) {
-            if (userFoundObjects.charAt(i) == '1')
-                alreadyFound++;
-        }
-        return "" + alreadyFound + "/" + userFoundObjects.length();
-    }
-    // Returns which specific objects have been found
-    public String getFoundObjectsNames() {
-        String output = "";
-        for (int i = 0; i < OBJECTS.length; i++) {
-            output += OBJECTS[i] + ": ";
-            if (userFoundObjects.charAt(i) == '1')
-                output += "Found. ";
-            else
-                output += "Not Found. ";
-
-        }
-        return output;
+    public void setUserGamesWon(String userGamesWon) {
+        this.userGamesWon = userGamesWon;
     }
 }

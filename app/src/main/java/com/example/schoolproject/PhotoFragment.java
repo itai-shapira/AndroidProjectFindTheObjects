@@ -2,6 +2,8 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -78,14 +80,11 @@ public class PhotoFragment extends Fragment {
         tvConfidence = view.findViewById(R.id.tvConfidence);
         tvFound = view.findViewById(R.id.tvFound);
 
-        HelperDB helperDB = new HelperDB(getActivity());
-
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
 
-        String stFound = "Found: " + currentUser.getFoundObjectsString();
+        String stFound = "Found: ";
         tvFound.setText(stFound);
 
         // Creating the ActivityResultLauncher (takes a photo, classifies it using AI, and updates the database according to the results)
@@ -110,29 +109,7 @@ public class PhotoFragment extends Fragment {
                         }
                         editor.apply();
 
-                        String userName = currentUser.getUserName();
-                        /*
-                        String userFoundObjects = currentUser.getUserFoundObjects();
-                        String newUserFoundObjects = "";
-
-                        for (int i = 0; i < userFoundObjects.length(); i++) {
-                            if (i == max)
-                                newUserFoundObjects += "1";
-                            else
-                                newUserFoundObjects += "0";
-                        }
-
-                        // Inserts the new data to the database
-                        ContentValues cv = new ContentValues();
-
-                        cv.put(helperDB.USER_NAME, currentUser.getUserName());
-                        cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
-                        cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
-                        cv.put(helperDB.USER_FOUND_OBJECTS, newUserFoundObjects);
-                        helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(userName)) + 1, cv);
-                        */
-
-                        String stFound = "Found: " + helperDB.getRecord(userName).getFoundObjectsString();
+                        String stFound = "Found: ";
                         tvFound.setText(stFound);
                     } });
 

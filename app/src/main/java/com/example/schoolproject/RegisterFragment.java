@@ -72,7 +72,7 @@ public class RegisterFragment extends Fragment {
                         cv.put(helperDB.USER_NAME, user.getUserName());
                         cv.put(helperDB.USER_PWD, user.getUserPwd());
                         cv.put(helperDB.USER_PHONE, user.getUserPhone());
-                        cv.put(helperDB.USER_FOUND_OBJECTS, user.getUserFoundObjects());
+                        cv.put(helperDB.USER_GAMES_WON, user.getUserGamesWon());
 
                         SQLiteDatabase db = helperDB.getWritableDatabase();
                         db.insert(helperDB.USERS_TABLE, null, cv);

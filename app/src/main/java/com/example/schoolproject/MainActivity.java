@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         HelperDB helperDB = new HelperDB(MainActivity.this);
 
         User currentUser = helperDB.getRecord(currentUserName);
-        tvFound.setText(currentUser.getFoundObjectsNames());
+        tvFound.setText(currentUser.getUserGamesWon());
 
         // Logs-out the user and navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {

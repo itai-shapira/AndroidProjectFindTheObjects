@@ -13,15 +13,15 @@ import java.util.List;
 // Handles the RecyclerView in the Users screen
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
     private List<String> UserNameList;
-    private List<String> UserFoundObjectsList;
+    private List<String> UserGamesWon;
 
     // Constructor
-    public UsersAdapter(List<String> UserNameList, List<String> UserFoundObjects) {
+    public UsersAdapter(List<String> UserNameList, List<String> UserGamesWon) {
         this.UserNameList = UserNameList;
-        this.UserFoundObjectsList = UserFoundObjects;
+        this.UserGamesWon = UserGamesWon;
     }
 
-    // Inflate the item layout for each user
+    // Inflates the layout for users_recycler_view from the screen containing the RecyclerView
     @NonNull
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,10 +35,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     @Override
     public void onBindViewHolder(UsersViewHolder holder, int position) {
         String userName = UserNameList.get(position);
-        String userFoundObjects = "Found: " + UserFoundObjectsList.get(position);
+        String userFoundObjects = "Found: " + UserGamesWon.get(position);
 
         holder.userNameTextView.setText(userName);
-        holder.userFoundObjectsView.setText(userFoundObjects);
+        holder.userGamesWonView.setText(userFoundObjects);
     }
 
     // Returns the amount of rows in the RecyclerView
@@ -47,16 +47,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
         return UserNameList.size();
     }
 
-    // Class that handles connecting to the RecyclerView xml file
+    // Class that handles the View parameters of the RecyclerView
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
         TextView userNameTextView;
-        TextView userFoundObjectsView;
+        TextView userGamesWonView;
 
         // Constructor
         public UsersViewHolder(View itemView) {
             super(itemView);
             userNameTextView = itemView.findViewById(R.id.tvUserName);
-            userFoundObjectsView = itemView.findViewById(R.id.tvUserFoundObjects);
+            userGamesWonView = itemView.findViewById(R.id.tvUserGamesWon);
         }
     }
 }

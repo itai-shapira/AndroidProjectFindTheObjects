@@ -18,7 +18,7 @@ public class HelperDB extends SQLiteOpenHelper {
     public static final String USER_NAME = "UserName";
     public static final String USER_PWD = "UserPassword";
     public static final String USER_PHONE = "UserPhone";
-    public static final String USER_FOUND_OBJECTS = "UserFoundObjects";
+    public static final String USER_GAMES_WON = "UserGamesWon";
     SQLiteDatabase db;
 
     // Constructor
@@ -42,14 +42,14 @@ public class HelperDB extends SQLiteOpenHelper {
         st += "("+USER_NAME+" TEXT, ";
         st += USER_PWD+" TEXT, ";
         st += USER_PHONE+" TEXT, ";
-        st += USER_FOUND_OBJECTS+" TEXT);";
+        st += USER_GAMES_WON +" TEXT);";
         return st;
     }
 
     // Reads and returns the data from the Users table
     public ArrayList<User> getAllRecords() {
         int index;
-        String name, pwd, phone, found_objects;
+        String name, pwd, phone, games_won;
         db = this.getReadableDatabase();
         ArrayList<User> list = new ArrayList<>();
 
@@ -62,9 +62,9 @@ public class HelperDB extends SQLiteOpenHelper {
             pwd = cursor.getString(index);
             index = cursor.getColumnIndex(USER_PHONE);
             phone = cursor.getString(index);
-            index = cursor.getColumnIndex(USER_FOUND_OBJECTS);
-            found_objects = cursor.getString(index);
-            User record = new User(name, pwd, phone, found_objects);
+            index = cursor.getColumnIndex(USER_GAMES_WON);
+            games_won = cursor.getString(index);
+            User record = new User(name, pwd, phone, games_won);
             list.add(record);
         }
 
@@ -81,7 +81,7 @@ public class HelperDB extends SQLiteOpenHelper {
         return null;
     }
 
-    // Deletes a row from the database
+    // Updates a row in the database by username
     public void updateRow(long id, ContentValues cv) {
         db = this.getWritableDatabase();
         Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);

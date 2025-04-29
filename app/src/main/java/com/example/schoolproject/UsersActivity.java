@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
 
 // The screen where all the user's statistics can be viewed
 public class UsersActivity extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class UsersActivity extends AppCompatActivity {
     RecyclerView usersRecyclerView;
     UsersAdapter usersAdapter;
     ArrayList<String> userNameList;
-    ArrayList<String> userFoundObjectsList;
+    ArrayList<String> userGamesWon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +38,16 @@ public class UsersActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
-    // creates the RecyclerView where all the user's stats are displayed
+    // creates the RecyclerView where all the users' stats are displayed
     private void initRecyclerView() {
         userNameList = new ArrayList<String>();
-        userFoundObjectsList = new ArrayList<String>();
+        userGamesWon = new ArrayList<String>();
 
         HelperDB helperDB = new HelperDB(UsersActivity.this);
         ArrayList<User> users = helperDB.getAllRecords();
         for (User user : users) {
             userNameList.add(user.getUserName());
-            userFoundObjectsList.add(user.getFoundObjectsString());
+            userGamesWon.add(user.getUserGamesWon());
         }
 
         // Set up the RecyclerView
@@ -56,7 +55,7 @@ public class UsersActivity extends AppCompatActivity {
         // Defines to the RecyclerView how to order the items
         usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Pass the list of Users to class UsersAdapter
-        usersAdapter = new UsersAdapter(userNameList, userFoundObjectsList);
+        usersAdapter = new UsersAdapter(userNameList, userGamesWon);
         usersRecyclerView.setAdapter(usersAdapter);
         usersAdapter.notifyDataSetChanged();
     }
