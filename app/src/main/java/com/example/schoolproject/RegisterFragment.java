@@ -64,29 +64,32 @@ public class RegisterFragment extends Fragment {
                 userPwdCheck = etPwdCheckRegister.getText().toString();
                 userPhone = etPhoneRegister.getText().toString();
 
-                if (helperDB.getRecord(userName) == null) {
-                    if (userPwd.equals(userPwdCheck)) {
-                        User user = new User(userName, userPwd, userPhone);
+                if (!userName.equals("DefaultName")) {
+                    if (helperDB.getRecord(userName) == null) {
+                        if (userPwd.equals(userPwdCheck)) {
+                            User user = new User(userName, userPwd, userPhone);
 
-                        ContentValues cv = new ContentValues();
-                        cv.put(helperDB.USER_NAME, user.getUserName());
-                        cv.put(helperDB.USER_PWD, user.getUserPwd());
-                        cv.put(helperDB.USER_PHONE, user.getUserPhone());
-                        cv.put(helperDB.USER_GAMES_WON, user.getUserGamesWon());
+                            ContentValues cv = new ContentValues();
+                            cv.put(helperDB.USER_NAME, user.getUserName());
+                            cv.put(helperDB.USER_PWD, user.getUserPwd());
+                            cv.put(helperDB.USER_PHONE, user.getUserPhone());
+                            cv.put(helperDB.USER_GAMES_WON, user.getUserGamesWon());
 
-                        SQLiteDatabase db = helperDB.getWritableDatabase();
-                        db.insert(helperDB.USERS_TABLE, null, cv);
-                        db.close();
+                            SQLiteDatabase db = helperDB.getWritableDatabase();
+                            db.insert(helperDB.USERS_TABLE, null, cv);
+                            db.close();
 
-                        editor.putString("username", userName);
-                        editor.apply();
+                            editor.putString("username", userName);
+                            editor.apply();
 
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        } else
+                            tvError.setText("Passwords do not match");
                     } else
-                        tvError.setText("Passwords do not match");
+                        tvError.setText("Username already exists");
                 } else
-                    tvError.setText("Username already exists");
+                    tvError.setText("Invalid Username");
             }
         });
 

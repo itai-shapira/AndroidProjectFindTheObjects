@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -58,5 +61,39 @@ public class UsersActivity extends AppCompatActivity {
         usersAdapter = new UsersAdapter(userNameList, userGamesWon);
         usersRecyclerView.setAdapter(usersAdapter);
         usersAdapter.notifyDataSetChanged();
+    }
+
+    // Create Menu
+    @Override
+    public  boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.miMainActivity) {
+            // Navigates to the Main screen
+            Intent intent = new Intent(UsersActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.miGameFragment) {
+            // Navigates to the Game screen
+            Intent intent = new Intent(UsersActivity.this, GameActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.miIntroActivity) {
+            // Logs-out the user and navigates to the Intro screen
+            SharedPreferences sharedPreferences = UsersActivity.this.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.remove("username");
+            editor.putBoolean("game_in_progress", false);
+            editor.apply();
+
+            Intent intent = new Intent(UsersActivity.this, IntroActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }

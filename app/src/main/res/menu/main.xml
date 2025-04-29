@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miMainActivity"
+        android:title="Main Menu"
+        />
+    <item
+        android:id="@+id/miGameFragment"
+        android:title="Start/Continue Game"
+        />
+    <item
+        android:id="@+id/miUsersActivity"
+        android:title="Users on this Device"
+        />
+    <item
+        android:id="@+id/miIntroActivity"
+        android:title="Log-Out"
+        />
+</menu>
