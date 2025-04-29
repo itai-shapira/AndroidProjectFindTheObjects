@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class GameFragment extends Fragment {
 
-    Button btPhotoActivity, btMainActivity, btRestart;
+    Button btPhotoActivity, btMainActivity, btRestart, btInstructionsActivity;
     TextView tvTitle, tvFound;
     CheckBox cbObject0, cbObject1, cbObject2, cbObject3;
 
@@ -57,6 +57,7 @@ public class GameFragment extends Fragment {
         btPhotoActivity = view.findViewById(R.id.btPhotoActivity);
         btMainActivity = view.findViewById(R.id.btMainActivity);
         btRestart = view.findViewById(R.id.btRestart);
+        btInstructionsActivity = view.findViewById(R.id.btInstructionsActivity);
         tvTitle = view.findViewById(R.id.tvTitle);
         cbObject0 = view.findViewById(R.id.cbObject0);
         cbObject1 = view.findViewById(R.id.cbObject1);
@@ -120,6 +121,16 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        // Navigates to the Instructions screen when the button is pressed
+        btInstructionsActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, new InstructionsFragment());
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
         // Starts a new game

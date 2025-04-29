@@ -20,15 +20,24 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#8D8D8D"
-            android:text="Main Menu"
-            android:textColor="@color/black" />
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
+            android:text="Main Menu" />
+
+        <Button
+            android:id="@+id/btInstructionsActivity"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#8D8D8D"
+            android:textColor="@color/common_google_signin_btn_text_light_pressed"
+            android:text="Info" />
 
         <Button
             android:id="@+id/btRestart"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="120dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
             android:backgroundTint="@color/design_default_color_error"
             android:textColor="@color/white"
             android:text="Restart" />
