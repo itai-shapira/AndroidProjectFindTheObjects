@@ -108,6 +108,7 @@ public class PhotoFragment extends Fragment {
                                 editor.putBoolean("object_found" + i, true);
                         }
                         editor.apply();
+                        updateProgress();
                     } });
 
         // Navigates to the Game screen when the button is pressed
@@ -169,7 +170,6 @@ public class PhotoFragment extends Fragment {
             }
             tvResult.setText(CLASSES[max]);
             tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
-            updateProgress();
             // Releases model resources if no longer used.
             model.close();
             return max;
