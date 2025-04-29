@@ -25,6 +25,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.schoolproject.ml.ModelUnquant;
@@ -42,8 +43,9 @@ public class PhotoFragment extends Fragment {
 
     Button btCamera, btGameFragment;
     ImageView ivPhoto;
-    TextView tvResult, tvConfidence, tvFound;
+    TextView tvResult, tvConfidence;
     ActivityResultLauncher<Intent> arLauncher;
+    ProgressBar pbProgress;
     final int IMAGE_SIZE = 224;
 
     public PhotoFragment() {
@@ -76,14 +78,14 @@ public class PhotoFragment extends Fragment {
         btGameFragment = view.findViewById(R.id.btGameFragment);
         tvResult = view.findViewById(R.id.tvResult);
         tvConfidence = view.findViewById(R.id.tvConfidence);
-        tvFound = view.findViewById(R.id.tvFound);
+        pbProgress = view.findViewById(R.id.pbProgress);
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String stFound = "Found: ";
-        tvFound.setText(stFound);
+        // Update the progress Bar
+        updateProgress();
 
         // Creating the ActivityResultLauncher (takes a photo, classifies it using AI, and updates the database according to the results)
         arLauncher = registerForActivityResult(
@@ -106,9 +108,6 @@ public class PhotoFragment extends Fragment {
                                 editor.putBoolean("object_found" + i, true);
                         }
                         editor.apply();
-
-                        String stFound = "Found: ";
-                        tvFound.setText(stFound);
                     } });
 
         // Navigates to the Game screen when the button is pressed
@@ -170,6 +169,7 @@ public class PhotoFragment extends Fragment {
             }
             tvResult.setText(CLASSES[max]);
             tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
+            updateProgress();
             // Releases model resources if no longer used.
             model.close();
             return max;
@@ -177,5 +177,18 @@ public class PhotoFragment extends Fragment {
         } catch (IOException e) {
             return 0;
         }
+    }
+
+    // Updates the progress bar
+    private void updateProgress() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
+
+        int objectsFound = 0;
+        for (int i = 0; i < 4; i++) {
+            if(sharedPreferences.getBoolean("object_found" + i, false))
+                objectsFound++;
+        }
+
+        pbProgress.setProgress(objectsFound * 25);
     }
 }
