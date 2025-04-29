@@ -7,6 +7,7 @@
     tools:context=".GameFragment">
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -15,6 +16,7 @@
 
         <Button
             android:id="@+id/btMainActivity"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#8D8D8D"
@@ -23,12 +25,13 @@
 
         <Button
             android:id="@+id/btRestart"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
-            android:backgroundTint="#8D8D8D"
-            android:text="Restart"
-            android:textColor="@color/black" />
+            android:backgroundTint="@color/design_default_color_error"
+            android:textColor="@color/white"
+            android:text="Restart" />
     </LinearLayout>
 
     <TextView
@@ -38,24 +41,48 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="50dp"
+        android:textSize="50sp"
         android:text="Objects Found:" />
 
     <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="match_parent"
+        android:id="@+id/cbObject0"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="CheckBox" />
+        android:layout_gravity="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="20sp"
+        android:text="Object 0" />
 
-    <TextView
-        android:id="@+id/tvFound"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/cbObject1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:text="Found" />
+        android:enabled="false"
+        android:layout_gravity="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="20sp"
+        android:text="Object 1" />
+
+    <CheckBox
+        android:id="@+id/cbObject2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:layout_gravity="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="20sp"
+        android:text="Object 2" />
+
+    <CheckBox
+        android:id="@+id/cbObject3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:layout_gravity="center"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="20sp"
+        android:text="Object 3" />
 
     <Button
         android:id="@+id/btPhotoActivity"

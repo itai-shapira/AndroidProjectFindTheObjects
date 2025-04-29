@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -32,6 +33,7 @@ public class GameFragment extends Fragment {
 
     Button btPhotoActivity, btMainActivity, btRestart;
     TextView tvTitle, tvFound;
+    CheckBox cbObject0, cbObject1, cbObject2, cbObject3;
 
     public GameFragment() {
         // Required empty public constructor
@@ -56,7 +58,10 @@ public class GameFragment extends Fragment {
         btMainActivity = view.findViewById(R.id.btMainActivity);
         btRestart = view.findViewById(R.id.btRestart);
         tvTitle = view.findViewById(R.id.tvTitle);
-        tvFound = view.findViewById(R.id.tvFound);
+        cbObject0 = view.findViewById(R.id.cbObject0);
+        cbObject1 = view.findViewById(R.id.cbObject1);
+        cbObject2 = view.findViewById(R.id.cbObject2);
+        cbObject3 = view.findViewById(R.id.cbObject3);
 
         HelperDB helperDB = new HelperDB(getActivity());
 
@@ -78,7 +83,15 @@ public class GameFragment extends Fragment {
             objectsFound[i] = sharedPreferences.getBoolean("object_found" + i, false);
         }
 
-        tvFound.setText(objects[0] + ": " + objectsFound[0] + ", " + objects[1] + ": " + objectsFound[1] + ", " + objects[2] + ": " + objectsFound[2] + ", " + objects[3] + ": " + objectsFound[3]);
+        // Set Found Objects
+        cbObject0.setText(CLASSES[objects[0]]);
+        cbObject0.setChecked(objectsFound[0]);
+        cbObject1.setText(CLASSES[objects[1]]);
+        cbObject1.setChecked(objectsFound[1]);
+        cbObject2.setText(CLASSES[objects[2]]);
+        cbObject2.setChecked(objectsFound[2]);
+        cbObject3.setText(CLASSES[objects[3]]);
+        cbObject3.setChecked(objectsFound[3]);
 
         // Checks if the win requirements have been met
         if (objectsFound[0] && objectsFound[1] && objectsFound[2] && objectsFound[3]) {
