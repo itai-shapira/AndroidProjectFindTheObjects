@@ -2,8 +2,6 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import static java.lang.Integer.parseInt;
-
 import android.content.Context;
 import android.os.Bundle;
 
