@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class GameFragment extends Fragment {
 
-    Button btPhotoActivity, btMainActivity;
+    Button btPhotoActivity, btMainActivity, btRestart;
     TextView tvTitle, tvFound;
 
     public GameFragment() {
@@ -48,6 +48,7 @@ public class GameFragment extends Fragment {
 
         btPhotoActivity = view.findViewById(R.id.btPhotoActivity);
         btMainActivity = view.findViewById(R.id.btMainActivity);
+        btRestart = view.findViewById(R.id.btRestart);
         tvTitle = view.findViewById(R.id.tvTitle);
         tvFound = view.findViewById(R.id.tvFound);
 
@@ -90,6 +91,13 @@ public class GameFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        // Restarts Current Game
+        btRestart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
             }
         });
         // Navigates to the Photo screen when the button is pressed
