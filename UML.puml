@@ -1,55 +1,63 @@
 @startuml
-class ExampleUnitTest {
-}
-class PhotoActivity {
-~ Button btCamera
-~ ImageView ivPhoto
-~ TextView tvResult
-~ ActivityResultLauncher<Intent> arLauncher
-~ int IMAGE_SIZE
-}
-
 class UsersActivity {
 ~ Button btMainActivity
 ~ RecyclerView usersRecyclerView
 ~ UsersAdapter usersAdapter
 ~ ArrayList<String> userNameList
-~ ArrayList<String> userFoundObjectsList
+~ ArrayList<String> userGamesWonList
 }
 
 class LoginFragment {
 ~ Button btIntroActivity
 ~ EditText etUserNameLogin
 ~ TextView tvError
-~ HelperDB helperDB
 }
 
+class GameActivity {
+}
 class RegisterFragment {
 ~ Button btIntroActivity
 ~ EditText etUserNameRegister
 ~ TextView tvError
 }
 
+class InstructionsFragment {
+~ Button btGameFragment
+}
+
 class UsersAdapter {
 - List<String> UserNameList
-- List<String> UserFoundObjectsList
+- List<String> UserGamesWonList
 }
 
 class UsersAdapter$UsersViewHolder {
 ~ TextView userNameTextView
-~ TextView userFoundObjectsView
+~ TextView userGamesWonView
 }
 
 class MainActivity {
-~ Button btPhotoActivity
+~ Button btGameFragment
 ~ TextView tvWelcome
 }
 
 class LoginActivity {
 }
+class PhotoFragment {
+~ Button btCamera
+~ ImageView ivPhoto
+~ TextView tvResult
+~ ActivityResultLauncher<Intent> arLauncher
+~ ProgressBar pbProgress
+~ int IMAGE_SIZE
+}
+
 class User {
-~ String[] OBJECTS
 - String userName
+}
+
+class GameFragment {
+~ Button btPhotoActivity
+~ CheckBox cbObject0
 }
 
 class RecoverPasswordFragment {
@@ -61,35 +69,40 @@ class RecoverPasswordFragment {
 
 class IntroActivity {
 ~ Button btLoginFragment
-~ SharedPreferences sharedPreferences
 ~ String currentUser
 ~ String DEFAULT_NAME
 }
 
-class ExampleInstrumentedTest {
+class WinFragment {
+~ Button btMainActivity
 }
+
 class HelperDB {
 + {static} String DB_FILE
 + {static} String USERS_TABLE
 + {static} String USER_NAME
 + {static} String USER_PWD
 + {static} String USER_PHONE
-+ {static} String USER_FOUND_OBJECTS
++ {static} String USER_GAMES_WON
 ~ SQLiteDatabase db
 }
 
 
 
-AppCompatActivity <|-- PhotoActivity
 AppCompatActivity <|-- UsersActivity
 Fragment <|-- LoginFragment
+AppCompatActivity <|-- GameActivity
 Fragment <|-- RegisterFragment
+Fragment <|-- InstructionsFragment
 Adapter <|-- UsersAdapter
 UsersAdapter +.. UsersAdapter$UsersViewHolder
 ViewHolder <|-- UsersAdapter$UsersViewHolder
 AppCompatActivity <|-- MainActivity
 AppCompatActivity <|-- LoginActivity
+Fragment <|-- PhotoFragment
+Fragment <|-- GameFragment
 Fragment <|-- RecoverPasswordFragment
 AppCompatActivity <|-- IntroActivity
+Fragment <|-- WinFragment
 SQLiteOpenHelper <|-- HelperDB
 @enduml

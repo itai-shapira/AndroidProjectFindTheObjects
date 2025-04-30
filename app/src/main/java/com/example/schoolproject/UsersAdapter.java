@@ -13,15 +13,15 @@ import java.util.List;
 // Handles the RecyclerView in the Users screen
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHolder> {
     private List<String> UserNameList;
-    private List<String> UserGamesWon;
+    private List<String> UserGamesWonList;
 
     // Constructor
-    public UsersAdapter(List<String> UserNameList, List<String> UserGamesWon) {
+    public UsersAdapter(List<String> UserNameList, List<String> UserGamesWonList) {
         this.UserNameList = UserNameList;
-        this.UserGamesWon = UserGamesWon;
+        this.UserGamesWonList = UserGamesWonList;
     }
 
-    // Inflates the layout for users_recycler_view from the screen containing the RecyclerView
+    // Inflates Layout fir RecyclerView
     @NonNull
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,10 +35,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     @Override
     public void onBindViewHolder(UsersViewHolder holder, int position) {
         String userName = UserNameList.get(position);
-        String userFoundObjects = "Found: " + UserGamesWon.get(position);
+        String userFoundObjects = "Found: " + UserGamesWonList.get(position);
 
         holder.userNameTextView.setText(userName);
-        holder.userGamesWonView.setText(userFoundObjects);
+        holder.userGamesWonTextView.setText(userFoundObjects);
     }
 
     // Returns the amount of rows in the RecyclerView
@@ -50,13 +50,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     // Class that handles the View parameters of the RecyclerView
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
         TextView userNameTextView;
-        TextView userGamesWonView;
+        TextView userGamesWonTextView;
 
         // Constructor
         public UsersViewHolder(View itemView) {
             super(itemView);
             userNameTextView = itemView.findViewById(R.id.tvUserName);
-            userGamesWonView = itemView.findViewById(R.id.tvUserGamesWon);
+            userGamesWonTextView = itemView.findViewById(R.id.tvUserGamesWon);
         }
     }
 }

@@ -22,7 +22,7 @@ public class UsersActivity extends AppCompatActivity {
     RecyclerView usersRecyclerView;
     UsersAdapter usersAdapter;
     ArrayList<String> userNameList;
-    ArrayList<String> userGamesWon;
+    ArrayList<String> userGamesWonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +46,13 @@ public class UsersActivity extends AppCompatActivity {
     @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView() {
         userNameList = new ArrayList<String>();
-        userGamesWon = new ArrayList<String>();
+        userGamesWonList = new ArrayList<String>();
 
         HelperDB helperDB = new HelperDB(UsersActivity.this);
         ArrayList<User> users = helperDB.getAllRecords();
         for (User user : users) {
             userNameList.add(user.getUserName());
-            userGamesWon.add(user.getUserGamesWon());
+            userGamesWonList.add(user.getUserGamesWon());
         }
 
         // Set up the RecyclerView
@@ -60,7 +60,7 @@ public class UsersActivity extends AppCompatActivity {
         // Defines to the RecyclerView how to order the items
         usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // Pass the list of Users to class UsersAdapter
-        usersAdapter = new UsersAdapter(userNameList, userGamesWon);
+        usersAdapter = new UsersAdapter(userNameList, userGamesWonList);
         usersRecyclerView.setAdapter(usersAdapter);
         usersAdapter.notifyDataSetChanged();
     }

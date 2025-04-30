@@ -1,0 +1,116 @@
+@startuml
+class UsersActivity {
+# void onCreate(Bundle)
+- void initRecyclerView()
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+class LoginFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+class GameActivity {
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+class RegisterFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+class InstructionsFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+class UsersAdapter {
++ UsersViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(UsersViewHolder,int)
++ int getItemCount()
+}
+
+class UsersAdapter$UsersViewHolder {
+}
+class MainActivity {
+# void onCreate(Bundle)
++ boolean onCreateOptionsMenu(Menu)
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+class LoginActivity {
+# void onCreate(Bundle)
+}
+
+class PhotoFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- int classifyImage(Bitmap)
+- void updateProgress()
+- void checkWin()
+}
+
+class User {
++ String getUserName()
++ void setUserName(String)
++ String getUserPwd()
++ void setUserPwd(String)
++ String getUserPhone()
++ void setUserPhone(String)
++ String getUserGamesWon()
++ void setUserGamesWon(String)
+}
+
+class GameFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+- void startGame()
+}
+
+class RecoverPasswordFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void checkPermission(String,int)
++ void onRequestPermissionsResult(int,String[],int[])
+}
+
+class IntroActivity {
+# void onCreate(Bundle)
+}
+
+class WinFragment {
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+class HelperDB {
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ String buildUserTable()
++ ArrayList<User> getAllRecords()
++ User getRecord(String)
++ void updateRow(long,ContentValues)
+}
+
+
+
+AppCompatActivity <|-- UsersActivity
+Fragment <|-- LoginFragment
+AppCompatActivity <|-- GameActivity
+Fragment <|-- RegisterFragment
+Fragment <|-- InstructionsFragment
+Adapter <|-- UsersAdapter
+UsersAdapter +.. UsersAdapter$UsersViewHolder
+ViewHolder <|-- UsersAdapter$UsersViewHolder
+AppCompatActivity <|-- MainActivity
+AppCompatActivity <|-- LoginActivity
+Fragment <|-- PhotoFragment
+Fragment <|-- GameFragment
+Fragment <|-- RecoverPasswordFragment
+AppCompatActivity <|-- IntroActivity
+Fragment <|-- WinFragment
+SQLiteOpenHelper <|-- HelperDB
+@enduml
