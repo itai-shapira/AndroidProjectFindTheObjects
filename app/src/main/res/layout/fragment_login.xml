@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#40C4FF"
     tools:context=".LoginFragment">
 
     <Button
@@ -12,50 +13,59 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:backgroundTint="#8D8D8D"
-        android:textColor="@color/black"
-        android:text="Home" />
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
+        android:text="Back" />
 
     <TextView
         android:id="@+id/tvLoginTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="50sp"
+        android:textColor="#1A237E"
         android:text="Welcome Back!" />
 
     <EditText
         android:id="@+id/etUserNameLogin"
         android:layout_gravity="center"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:autofillHints="username"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
-        android:textColorHint="#6E6E6E" />
+        android:textColor="#1A237E"
+        android:textColorHint="@color/material_dynamic_neutral20" />
 
     <EditText
         android:id="@+id/etPwdLogin"
         android:layout_gravity="center"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:autofillHints="password"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#6E6E6E" />
+        android:textColor="#1A237E"
+        android:textColorHint="@color/material_dynamic_neutral20" />
 
     <Button
         android:id="@+id/btLogin"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
         android:text="Login" />
 
     <TextView
@@ -65,8 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:backgroundTint="#01000000"
-        android:textColor="#F44336"
+        android:textColor="#D50000"
         android:text="" />
 
     <Button
@@ -74,8 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#01000000"
-        android:textColor="#3F51B5"
+        android:backgroundTint="#00000000"
+        android:textColor="@color/white"
         android:text="Don't have an account? Click here to Register!" />
 
     <Button
@@ -83,8 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#01000000"
-        android:textColor="#3F51B5"
+        android:backgroundTint="#00000000"
+        android:textColor="@color/white"
         android:text="Forgot Password" />
 
 </LinearLayout>

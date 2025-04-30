@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String currentUserName = sharedPreferences.getString("username", "DefaultName");
 
-        tvWelcome.setText("Welcome " + currentUserName);
+        tvWelcome.setText("Welcome, " + currentUserName + "!");
 
         // Logs-out the user and navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {

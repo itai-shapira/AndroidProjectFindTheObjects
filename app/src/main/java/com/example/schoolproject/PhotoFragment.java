@@ -135,7 +135,7 @@ public class PhotoFragment extends Fragment {
         return view;
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private int classifyImage(Bitmap bitmap) {
         try {
             final String[] CLASSES = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
@@ -170,8 +170,8 @@ public class PhotoFragment extends Fragment {
                     max = i;
                 }
             }
-            tvResult.setText(CLASSES[max]);
-            tvConfidence.setText(String.format("%.1f%%", confidences[max] * 100));
+            tvResult.setText("This is a " + CLASSES[max] + "!");
+            tvConfidence.setText("Accuracy: " + String.format("%.1f%%", confidences[max] * 100));
             // Releases model resources if no longer used.
             model.close();
             return max;

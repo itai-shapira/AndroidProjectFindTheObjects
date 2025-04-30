@@ -35,7 +35,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersViewHol
     @Override
     public void onBindViewHolder(UsersViewHolder holder, int position) {
         String userName = UserNameList.get(position);
-        String userFoundObjects = "Found: " + UserGamesWonList.get(position);
+        String userFoundObjects = UserGamesWonList.get(position);
 
         holder.userNameTextView.setText(userName);
         holder.userGamesWonTextView.setText(userFoundObjects);

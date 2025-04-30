@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#40C4FF"
     tools:context=".PhotoFragment">
 
     <Button
@@ -12,23 +13,30 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:backgroundTint="#8D8D8D"
-        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
         android:text="Back" />
     <ImageView
         android:id="@+id/ivPhoto"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:layout_width="150dp"
         android:layout_height="200dp"
+        android:background="@color/white"
         android:contentDescription="Bitmap" />
 
     <Button
         android:id="@+id/btCamera"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#388E3C"
         android:text="Camera" />
 
     <TextView
@@ -38,6 +46,8 @@
         android:layout_marginTop="40dp"
         android:gravity="center"
         android:textSize="30sp"
+        android:textColor="#1A237E"
+        android:textStyle="bold"
         android:text="" />
 
     <TextView
@@ -46,7 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        android:textColor="#1A237E"
+        android:textStyle="bold"
         android:text="" />
 
     <TextView
@@ -56,6 +68,8 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textSize="30sp"
+        android:textColor="#1A237E"
+        android:textStyle="bold"
         android:text="Progress:" />
 
     <ProgressBar

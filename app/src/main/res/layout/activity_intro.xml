@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#40C4FF"
     tools:context=".IntroActivity" >
 
     <TextView
         android:id="@+id/tvIntroTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="50sp"
+        android:textSize="60sp"
+        android:textColor="#1A237E"
         android:text="Find The Objects" />
 
     <TextView
@@ -22,14 +24,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="By: Itai Zvi Shapira" />
+        android:textColor="#303F9F"
+        android:text="A Game By: Itai Zvi Shapira" />
 
     <Button
         android:id="@+id/btLoginFragment"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="120dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
         android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
         android:text="Login" />
 
 </LinearLayout>

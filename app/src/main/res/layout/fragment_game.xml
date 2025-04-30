@@ -4,42 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#40C4FF"
     tools:context=".GameFragment">
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btMainActivity"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#8D8D8D"
-            android:textColor="@color/black"
-            android:text="Main Menu" />
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#D84315"
+            android:text="Main" />
 
         <Button
             android:id="@+id/btInstructionsActivity"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:backgroundTint="#8D8D8D"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#00695C"
+            android:backgroundTint="#FFD600"
             android:text="Info" />
 
         <Button
             android:id="@+id/btRestart"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="80dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/design_default_color_error"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:textColor="@color/white"
+            android:backgroundTint="#D50000"
             android:text="Restart" />
     </LinearLayout>
 
@@ -47,10 +54,11 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="50sp"
+        android:textColor="#1A237E"
         android:text="Objects Found:" />
 
     <CheckBox
@@ -99,6 +107,10 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
         android:text="Take a Photo" />
 
 </LinearLayout>

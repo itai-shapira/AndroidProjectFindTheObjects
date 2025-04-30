@@ -5,24 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#40C4FF"
     tools:context=".WinFragment" >
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="50sp"
-        android:text="You Win!" />
+        android:textSize="40sp"
+        android:textColor="#1A237E"
+        android:text="Congratulations!" />
+
+    <TextView
+        android:id="@+id/tvIntroSubTitle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:text="You Have Found All 4 Objects!" />
 
     <Button
         android:id="@+id/btMainActivity"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_gravity="center"
-        android:text="Return to Main Menu" />
+        android:textColor="@color/white"
+        android:backgroundTint="#D84315"
+        android:text="Return to Main" />
 
 </LinearLayout>

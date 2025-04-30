@@ -48,6 +48,9 @@ public class UsersActivity extends AppCompatActivity {
         userNameList = new ArrayList<String>();
         userGamesWonList = new ArrayList<String>();
 
+        userNameList.add("Username:");
+        userGamesWonList.add("Games Won:");
+
         HelperDB helperDB = new HelperDB(UsersActivity.this);
         ArrayList<User> users = helperDB.getAllRecords();
         for (User user : users) {
