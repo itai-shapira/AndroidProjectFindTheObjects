@@ -53,7 +53,7 @@ public class HelperDB extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         ArrayList<User> list = new ArrayList<>();
 
-        Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);
+        Cursor cursor = db.query(USERS_TABLE, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             index = cursor.getColumnIndex(USER_NAME);
@@ -68,6 +68,7 @@ public class HelperDB extends SQLiteOpenHelper {
             list.add(record);
         }
 
+        cursor.close();
         db.close();
         return list;
     }
@@ -84,9 +85,10 @@ public class HelperDB extends SQLiteOpenHelper {
     // Updates a row in the database by username
     public void updateRow(long id, ContentValues cv) {
         db = this.getWritableDatabase();
-        Cursor cursor = db.query(this.USERS_TABLE, null, null, null, null, null, null);
+        Cursor cursor = db.query(USERS_TABLE, null, null, null, null, null, null);
         // db.delete(USERS_TABLE, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
         db.update(USERS_TABLE, cv, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
+        cursor.close();
         db.close();// close the database
     }
 }

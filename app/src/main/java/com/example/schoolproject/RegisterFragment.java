@@ -2,6 +2,7 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -48,14 +49,14 @@ public class RegisterFragment extends Fragment {
         tvError = view.findViewById(R.id.tvError);
         btLoginFragment = view.findViewById(R.id.btLoginFragment);
 
-        Context context = getActivity();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         HelperDB helperDB = new HelperDB(getActivity());
 
         // Registers user, adds their info to the database and navigates to the Main screen when the button is pressed
         btRegister.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String userName, userPwd, userPwdCheck, userPhone;
@@ -70,13 +71,13 @@ public class RegisterFragment extends Fragment {
                             User user = new User(userName, userPwd, userPhone);
 
                             ContentValues cv = new ContentValues();
-                            cv.put(helperDB.USER_NAME, user.getUserName());
-                            cv.put(helperDB.USER_PWD, user.getUserPwd());
-                            cv.put(helperDB.USER_PHONE, user.getUserPhone());
-                            cv.put(helperDB.USER_GAMES_WON, user.getUserGamesWon());
+                            cv.put(HelperDB.USER_NAME, user.getUserName());
+                            cv.put(HelperDB.USER_PWD, user.getUserPwd());
+                            cv.put(HelperDB.USER_PHONE, user.getUserPhone());
+                            cv.put(HelperDB.USER_GAMES_WON, user.getUserGamesWon());
 
                             SQLiteDatabase db = helperDB.getWritableDatabase();
-                            db.insert(helperDB.USERS_TABLE, null, cv);
+                            db.insert(HelperDB.USERS_TABLE, null, cv);
                             db.close();
 
                             editor.putString("username", userName);

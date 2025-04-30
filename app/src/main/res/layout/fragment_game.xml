@@ -20,7 +20,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#8D8D8D"
-            android:textColor="@color/common_google_signin_btn_text_light_pressed"
+            android:textColor="@color/black"
             android:text="Main Menu" />
 
         <Button
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:backgroundTint="#8D8D8D"
-            android:textColor="@color/common_google_signin_btn_text_light_pressed"
+            android:textColor="@color/black"
             android:text="Info" />
 
         <Button
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:layout_gravity="center"
-        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Object 0" />
 
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:layout_gravity="center"
-        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Object 1" />
 
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:layout_gravity="center"
-        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Object 2" />
 
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:layout_gravity="center"
-        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:text="Object 3" />
 

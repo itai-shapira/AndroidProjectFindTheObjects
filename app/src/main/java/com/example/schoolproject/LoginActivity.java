@@ -2,7 +2,6 @@ package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 // Contains all the fragments related to logging-in

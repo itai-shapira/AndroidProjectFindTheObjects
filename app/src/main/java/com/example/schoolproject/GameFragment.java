@@ -2,37 +2,29 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import static java.lang.Integer.parseInt;
-
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
+// The screen where the user begins a new game and can get various information
 public class GameFragment extends Fragment {
 
     Button btPhotoActivity, btMainActivity, btRestart, btInstructionsActivity;
-    TextView tvTitle, tvFound;
     CheckBox cbObject0, cbObject1, cbObject2, cbObject3;
 
     public GameFragment() {
@@ -58,7 +50,6 @@ public class GameFragment extends Fragment {
         btMainActivity = view.findViewById(R.id.btMainActivity);
         btRestart = view.findViewById(R.id.btRestart);
         btInstructionsActivity = view.findViewById(R.id.btInstructionsActivity);
-        tvTitle = view.findViewById(R.id.tvTitle);
         cbObject0 = view.findViewById(R.id.cbObject0);
         cbObject1 = view.findViewById(R.id.cbObject1);
         cbObject2 = view.findViewById(R.id.cbObject2);
@@ -134,8 +125,7 @@ public class GameFragment extends Fragment {
         List<Integer> rndObjects = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Collections.shuffle(rndObjects);
 
-        Context context = getActivity();
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
 
         // Initialize shared preferences for new game
         SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -1,19 +1,16 @@
 package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 
 // The first screen that opens when you launch the app
 public class IntroActivity extends AppCompatActivity {
     Button btLoginFragment;
-    SharedPreferences sharedPreferences;
     String currentUser;
     final String DEFAULT_NAME = "DefaultName";
     @Override

@@ -2,6 +2,7 @@ package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,8 +16,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button btGameFragment, btUsers, btIntroActivity;
-    TextView tvWelcome, tvFound;
+    TextView tvWelcome;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,18 +28,12 @@ public class MainActivity extends AppCompatActivity {
         btUsers = findViewById(R.id.btUsers);
         btIntroActivity = findViewById(R.id.btIntroActivity);
         tvWelcome = findViewById(R.id.tvWelcome);
-        tvFound = findViewById(R.id.tvFound);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String currentUserName = sharedPreferences.getString("username", "DefaultName");
 
         tvWelcome.setText("Welcome " + currentUserName);
-
-        HelperDB helperDB = new HelperDB(MainActivity.this);
-
-        User currentUser = helperDB.getRecord(currentUserName);
-        tvFound.setText(currentUser.getUserGamesWon());
 
         // Logs-out the user and navigates to the Intro screen when the button is pressed
         btIntroActivity.setOnClickListener(new View.OnClickListener() {

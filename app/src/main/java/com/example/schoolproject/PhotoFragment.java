@@ -12,7 +12,6 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -20,9 +19,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +38,7 @@ import java.nio.ByteOrder;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+// The screen where the user takes the photos scanned by the ai
 public class PhotoFragment extends Fragment {
 
     Button btCamera, btGameFragment;
@@ -108,12 +106,6 @@ public class PhotoFragment extends Fragment {
                         for (int i = 0; i < 4; i++) {
                             if (sharedPreferences.getInt("object" + i, -1) == max)
                                 editor.putBoolean("object_found" + i, true);
-                        }
-
-                        // Check if all objects have been found
-                        boolean foundAll = true;
-                        for (int i = 0; i < 4; i++) {
-
                         }
                         editor.apply();
 
@@ -224,10 +216,10 @@ public class PhotoFragment extends Fragment {
             int userGamesWon = parseInt(currentUser.getUserGamesWon()) + 1;
             ContentValues cv = new ContentValues();
 
-            cv.put(helperDB.USER_NAME, currentUser.getUserName());
-            cv.put(helperDB.USER_PWD, currentUser.getUserPwd());
-            cv.put(helperDB.USER_PHONE, currentUser.getUserPhone());
-            cv.put(helperDB.USER_GAMES_WON, userGamesWon);
+            cv.put(HelperDB.USER_NAME, currentUser.getUserName());
+            cv.put(HelperDB.USER_PWD, currentUser.getUserPwd());
+            cv.put(HelperDB.USER_PHONE, currentUser.getUserPhone());
+            cv.put(HelperDB.USER_GAMES_WON, userGamesWon);
             helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(currentUser.getUserName())) + 1, cv);
 
             // Navigates to the Win screen

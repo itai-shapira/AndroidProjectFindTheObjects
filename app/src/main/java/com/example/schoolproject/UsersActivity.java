@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     // creates the RecyclerView where all the users' stats are displayed
+    @SuppressLint("NotifyDataSetChanged")
     private void initRecyclerView() {
         userNameList = new ArrayList<String>();
         userGamesWon = new ArrayList<String>();

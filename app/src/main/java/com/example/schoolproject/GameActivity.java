@@ -2,14 +2,13 @@ package com.example.schoolproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// Contains all the fragments related to the Game
 public class GameActivity extends AppCompatActivity {
 
     @Override

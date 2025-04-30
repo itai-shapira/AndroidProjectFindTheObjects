@@ -1,6 +1,7 @@
 package com.example.schoolproject;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -62,6 +63,7 @@ public class RecoverPasswordFragment extends Fragment {
 
         // Sends an SMS to the user containing their username and password the button is pressed
         btSendSMS.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String userName = etUserName.getText().toString();

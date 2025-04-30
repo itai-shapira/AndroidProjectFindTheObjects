@@ -1,6 +1,5 @@
 package com.example.schoolproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+// The screen containing the instructions for the game
 public class InstructionsFragment extends Fragment {
 
     Button btGameFragment;
