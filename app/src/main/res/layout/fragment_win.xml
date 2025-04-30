@@ -20,7 +20,7 @@
         android:text="Congratulations!" />
 
     <TextView
-        android:id="@+id/tvIntroSubTitle"
+        android:id="@+id/tvSubTitle"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
