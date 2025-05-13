@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 // The screen where the user can recover their password in case they forgot it
 public class RecoverPasswordFragment extends Fragment {
@@ -93,28 +91,4 @@ public class RecoverPasswordFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[] { permission }, requestCode);
         }
     }
-
-    // Function to handle the results from checkPermission
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
-        super.onRequestPermissionsResult(requestCode,
-                permissions,
-                grantResults);
-
-        if (requestCode == SEND_SMS) {
-
-            if (grantResults.length > 0
-
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(getActivity(), "SMS Permission Granted", Toast.LENGTH_SHORT).show();
-
-            } else {
-
-                Toast.makeText(getActivity(), "SMS Permission Denied", Toast.LENGTH_SHORT).show();
-
-            }
-
-        }}
 }

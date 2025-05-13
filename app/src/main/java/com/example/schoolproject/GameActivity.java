@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 // Contains all the fragments related to the Game
 public class GameActivity extends AppCompatActivity {
@@ -38,6 +39,9 @@ public class GameActivity extends AppCompatActivity {
             // Navigates to the Main screen
             Intent intent = new Intent(GameActivity.this, MainActivity.class);
             startActivity(intent);
+        }
+        if (id == R.id.miGameFragment) {
+            Toast.makeText(this, "A game is currently being played", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.miUsersActivity) {
             // Navigates to the Users screen

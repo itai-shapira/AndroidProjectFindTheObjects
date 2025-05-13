@@ -4,7 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -75,6 +74,7 @@ public class RegisterFragment extends Fragment {
                             cv.put(HelperDB.USER_PWD, user.getUserPwd());
                             cv.put(HelperDB.USER_PHONE, user.getUserPhone());
                             cv.put(HelperDB.USER_GAMES_WON, user.getUserGamesWon());
+                            cv.put(HelperDB.USER_SHOW_INSTRUCTIONS, user.getUserShowInstructions());
 
                             SQLiteDatabase db = helperDB.getWritableDatabase();
                             db.insert(HelperDB.USERS_TABLE, null, cv);

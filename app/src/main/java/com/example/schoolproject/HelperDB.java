@@ -19,6 +19,7 @@ public class HelperDB extends SQLiteOpenHelper {
     public static final String USER_PWD = "UserPassword";
     public static final String USER_PHONE = "UserPhone";
     public static final String USER_GAMES_WON = "UserGamesWon";
+    public static final String USER_SHOW_INSTRUCTIONS = "UserShowInstructions";
     SQLiteDatabase db;
 
     // Constructor
@@ -42,14 +43,15 @@ public class HelperDB extends SQLiteOpenHelper {
         st += "("+USER_NAME+" TEXT, ";
         st += USER_PWD+" TEXT, ";
         st += USER_PHONE+" TEXT, ";
-        st += USER_GAMES_WON +" TEXT);";
+        st += USER_GAMES_WON +" TEXT, ";
+        st += USER_SHOW_INSTRUCTIONS +" TEXT);";
         return st;
     }
 
     // Reads and returns the data from the Users table
     public ArrayList<User> getAllRecords() {
         int index;
-        String name, pwd, phone, games_won;
+        String name, pwd, phone, games_won, show_instructions;
         db = this.getReadableDatabase();
         ArrayList<User> list = new ArrayList<>();
 
@@ -64,7 +66,9 @@ public class HelperDB extends SQLiteOpenHelper {
             phone = cursor.getString(index);
             index = cursor.getColumnIndex(USER_GAMES_WON);
             games_won = cursor.getString(index);
-            User record = new User(name, pwd, phone, games_won);
+            index = cursor.getColumnIndex(USER_SHOW_INSTRUCTIONS);
+            show_instructions = cursor.getString(index);
+            User record = new User(name, pwd, phone, games_won, show_instructions);
             list.add(record);
         }
 
@@ -86,7 +90,6 @@ public class HelperDB extends SQLiteOpenHelper {
     public void updateRow(long id, ContentValues cv) {
         db = this.getWritableDatabase();
         Cursor cursor = db.query(USERS_TABLE, null, null, null, null, null, null);
-        // db.delete(USERS_TABLE, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
         db.update(USERS_TABLE, cv, cursor.getColumnIndex(USER_NAME) + " = " + id, null);
         cursor.close();
         db.close();// close the database

@@ -43,7 +43,7 @@ public class PhotoFragment extends Fragment {
 
     Button btCamera, btGameFragment;
     ImageView ivPhoto;
-    TextView tvResult, tvConfidence;
+    TextView tvResult, tvConfidence, tvFound;
     ActivityResultLauncher<Intent> arLauncher;
     ProgressBar pbProgress;
     final int IMAGE_SIZE = 224;
@@ -79,12 +79,13 @@ public class PhotoFragment extends Fragment {
         tvResult = view.findViewById(R.id.tvResult);
         tvConfidence = view.findViewById(R.id.tvConfidence);
         pbProgress = view.findViewById(R.id.pbProgress);
+        tvFound = view.findViewById(R.id.tvFound);
 
         Context context = getActivity();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        // Update the progress Bar
+        // Update the Progress Bar and tvFound
         updateProgress();
 
         // Creating the ActivityResultLauncher (takes a photo, classifies it using AI, and updates the database according to the results)
@@ -138,7 +139,7 @@ public class PhotoFragment extends Fragment {
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private int classifyImage(Bitmap bitmap) {
         try {
-            final String[] CLASSES = {"Backpack", "Battery", "Calculator", "Charger", "Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
+            final String[] CLASSES = {"Backpack", "Battery", "Calculator", "Charger", "Pair of Glasses", "Notebook", "Pencil", "Plastic Bottle", "Shoe", "Umbrella"};
             ModelUnquant model = ModelUnquant.newInstance(getActivity().getApplicationContext());
 
             // Create inputs for reference.
@@ -182,6 +183,7 @@ public class PhotoFragment extends Fragment {
     }
 
     // Updates the progress bar
+    @SuppressLint("SetTextI18n")
     private void updateProgress() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", MODE_PRIVATE);
 
@@ -192,6 +194,7 @@ public class PhotoFragment extends Fragment {
         }
 
         pbProgress.setProgress(objectsFound * 25);
+        tvFound.setText(objectsFound + "/4");
     }
 
     // Check if all objects have been found and trigger a win if they have
@@ -220,6 +223,7 @@ public class PhotoFragment extends Fragment {
             cv.put(HelperDB.USER_PWD, currentUser.getUserPwd());
             cv.put(HelperDB.USER_PHONE, currentUser.getUserPhone());
             cv.put(HelperDB.USER_GAMES_WON, userGamesWon);
+            cv.put(HelperDB.USER_SHOW_INSTRUCTIONS, currentUser.getUserShowInstructions());
             helperDB.updateRow(helperDB.getAllRecords().indexOf(helperDB.getRecord(currentUser.getUserName())) + 1, cv);
 
             // Navigates to the Win screen

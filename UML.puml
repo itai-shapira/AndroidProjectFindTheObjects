@@ -23,6 +23,7 @@ class RegisterFragment {
 
 class InstructionsFragment {
 ~ Button btGameFragment
+~ CheckBox cbShowInstructions
 }
 
 class UsersAdapter {
@@ -32,7 +33,7 @@ class UsersAdapter {
 
 class UsersAdapter$UsersViewHolder {
 ~ TextView userNameTextView
-~ TextView userGamesWonView
+~ TextView userGamesWonTextView
 }
 
 class MainActivity {
@@ -41,7 +42,9 @@ class MainActivity {
 }
 
 class LoginActivity {
+- {static} int SEND_SMS
 }
+
 class PhotoFragment {
 ~ Button btCamera
 ~ ImageView ivPhoto
@@ -74,7 +77,7 @@ class IntroActivity {
 }
 
 class WinFragment {
-~ Button btMainActivity
+~ Button btGameFragment
 }
 
 class HelperDB {
@@ -84,6 +87,7 @@ class HelperDB {
 + {static} String USER_PWD
 + {static} String USER_PHONE
 + {static} String USER_GAMES_WON
++ {static} String USER_SHOW_INSTRUCTIONS
 ~ SQLiteDatabase db
 }
 

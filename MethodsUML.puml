@@ -43,6 +43,7 @@ class MainActivity {
 
 class LoginActivity {
 # void onCreate(Bundle)
++ void onRequestPermissionsResult(int,String[],int[])
 }
 
 class PhotoFragment {
@@ -62,6 +63,8 @@ class User {
 + void setUserPhone(String)
 + String getUserGamesWon()
 + void setUserGamesWon(String)
++ String getUserShowInstructions()
++ void setUserShowInstructions(String)
 }
 
 class GameFragment {
@@ -74,7 +77,6 @@ class RecoverPasswordFragment {
 + void onCreate(Bundle)
 + View onCreateView(LayoutInflater,ViewGroup,Bundle)
 + void checkPermission(String,int)
-+ void onRequestPermissionsResult(int,String[],int[])
 }
 
 class IntroActivity {

@@ -2,28 +2,24 @@ package com.example.schoolproject;
 
 // Handles the app's users
 public class User {
-    private String userName, userPwd, userPhone, userGamesWon;
+    private String userName, userPwd, userPhone, userGamesWon, userShowInstructions;
 
     // Constructor
-    public User(String userName, String userPwd, String userPhone, String userGamesWon) {
+    public User(String userName, String userPwd, String userPhone, String userGamesWon, String userShowInstructions) {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
         this.userGamesWon = userGamesWon;
+        this.userShowInstructions = userShowInstructions;
     }
 
-    // Constructor for the Register Activity
+    // Constructor for the Register Fragment
     public User(String userName, String userPwd, String userPhone) {
         this.userName = userName;
         this.userPwd = userPwd;
         this.userPhone = userPhone;
         userGamesWon = "0";
-    }
-
-    // Constructor for the login Activity
-    public User(String userName, String userPwd) {
-        this.userName = userName;
-        this.userPwd = userPwd;
+        userShowInstructions = "" + true;
     }
 
     // Returns username
@@ -50,12 +46,20 @@ public class User {
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
-    // Returns the amount of objects the user has found (in the way it is saved in the database)
+    // Returns the amount of objects the user has found (as a string like it is saved in the database)
     public String getUserGamesWon() {
         return userGamesWon;
     }
-    // Changes the amount of objects the user has found to input (saved in the way it is saved in the database)
+    // Changes if to show the user the instructions screen to input (saved as a string like it is saved in the database)
     public void setUserGamesWon(String userGamesWon) {
         this.userGamesWon = userGamesWon;
+    }
+    // Returns if to show the user the instructions screen (as a string like it is saved in the database)
+    public String getUserShowInstructions() {
+        return userShowInstructions;
+    }
+    // Changes the amount of objects the user has found to input (saved as a string like it is saved in the database)
+    public void setUserShowInstructions(String userShowInstructions) {
+        this.userShowInstructions = userShowInstructions;
     }
 }

@@ -2,8 +2,9 @@ package com.example.schoolproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static java.lang.Boolean.parseBoolean;
+
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -136,10 +137,22 @@ public class GameFragment extends Fragment {
         }
         editor.apply();
 
-        // Navigates to the Instructions screen
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new InstructionsFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        // Checks if to navigate to the Instructions screen
+        HelperDB helperDB = new HelperDB(getActivity());
+        User currentUser = helperDB.getRecord(sharedPreferences.getString("username", "DefaultName"));
+
+        if (parseBoolean(currentUser.getUserShowInstructions())) {
+            // Navigates to the Instructions screen
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new InstructionsFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else {
+            // Restarts this screen
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new GameFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }
